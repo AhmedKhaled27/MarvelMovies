@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B0C344C22B14DA4700485E8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C344C12B14DA4700485E8C /* AppDelegate.swift */; };
-		B0C344C62B14DA4700485E8C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C344C52B14DA4700485E8C /* ViewController.swift */; };
-		B0C344C92B14DA4700485E8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0C344C72B14DA4700485E8C /* Main.storyboard */; };
 		B0C344CC2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0C344CA2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld */; };
 		B0C344CE2B14DA4900485E8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0C344CD2B14DA4900485E8C /* Assets.xcassets */; };
 		B0C344D12B14DA4900485E8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0C344CF2B14DA4900485E8C /* LaunchScreen.storyboard */; };
@@ -18,8 +16,6 @@
 /* Begin PBXFileReference section */
 		B0C344BE2B14DA4700485E8C /* MarvelMoviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelMoviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0C344C12B14DA4700485E8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B0C344C52B14DA4700485E8C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B0C344C82B14DA4700485E8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B0C344CB2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MarvelMoviesApp.xcdatamodel; sourceTree = "<group>"; };
 		B0C344CD2B14DA4900485E8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0C344D02B14DA4900485E8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,8 +53,6 @@
 			isa = PBXGroup;
 			children = (
 				B0C344C12B14DA4700485E8C /* AppDelegate.swift */,
-				B0C344C52B14DA4700485E8C /* ViewController.swift */,
-				B0C344C72B14DA4700485E8C /* Main.storyboard */,
 				B0C344CD2B14DA4900485E8C /* Assets.xcassets */,
 				B0C344CF2B14DA4900485E8C /* LaunchScreen.storyboard */,
 				B0C344D22B14DA4900485E8C /* Info.plist */,
@@ -127,7 +121,6 @@
 			files = (
 				B0C344D12B14DA4900485E8C /* LaunchScreen.storyboard in Resources */,
 				B0C344CE2B14DA4900485E8C /* Assets.xcassets in Resources */,
-				B0C344C92B14DA4700485E8C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +131,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0C344C62B14DA4700485E8C /* ViewController.swift in Sources */,
 				B0C344C22B14DA4700485E8C /* AppDelegate.swift in Sources */,
 				B0C344CC2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld in Sources */,
 			);
@@ -147,14 +139,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B0C344C72B14DA4700485E8C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B0C344C82B14DA4700485E8C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B0C344CF2B14DA4900485E8C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,9 +276,7 @@
 				INFOPLIST_FILE = MarvelMoviesApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,9 +302,7 @@
 				INFOPLIST_FILE = MarvelMoviesApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

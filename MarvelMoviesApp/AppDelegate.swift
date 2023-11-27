@@ -15,9 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        setNewRoute()
         return true
     }
 
 }
 
+//MARK: New Route
+extension AppDelegate {
+    private func setNewRoute() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+
+        let splashViewController = UIViewController()
+        window?.rootViewController = splashViewController
+        
+        window?.makeKeyAndVisible()
+    }
+}
