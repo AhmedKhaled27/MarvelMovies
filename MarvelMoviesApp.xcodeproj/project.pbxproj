@@ -15,6 +15,7 @@
 		B0C344E42B15138D00485E8C /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C344E22B15138D00485E8C /* SplashViewController.xib */; };
 		B0C344F92B15233900485E8C /* MoviesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C344F72B15233900485E8C /* MoviesListTableViewController.swift */; };
 		B0C344FA2B15233900485E8C /* MoviesListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C344F82B15233900485E8C /* MoviesListTableViewController.xib */; };
+		B0C345112B155A2500485E8C /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = B0C345102B155A2500485E8C /* Moya */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0C345112B155A2500485E8C /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +155,9 @@
 			dependencies = (
 			);
 			name = MarvelMoviesApp;
+			packageProductDependencies = (
+				B0C345102B155A2500485E8C /* Moya */,
+			);
 			productName = MarvelMoviesApp;
 			productReference = B0C344BE2B14DA4700485E8C /* MarvelMoviesApp.app */;
 			productType = "com.apple.product-type.application";
@@ -182,6 +187,7 @@
 			);
 			mainGroup = B0C344B52B14DA4700485E8C;
 			packageReferences = (
+				B0C3450F2B155A2500485E8C /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = B0C344BF2B14DA4700485E8C /* Products */;
 			projectDirPath = "";
@@ -422,6 +428,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B0C3450F2B155A2500485E8C /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B0C345102B155A2500485E8C /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B0C3450F2B155A2500485E8C /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		B0C344CA2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld */ = {
