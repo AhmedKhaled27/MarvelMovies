@@ -13,6 +13,8 @@
 		B0C344D12B14DA4900485E8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0C344CF2B14DA4900485E8C /* LaunchScreen.storyboard */; };
 		B0C344E32B15138D00485E8C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C344E12B15138D00485E8C /* SplashViewController.swift */; };
 		B0C344E42B15138D00485E8C /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C344E22B15138D00485E8C /* SplashViewController.xib */; };
+		B0C344F92B15233900485E8C /* MoviesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C344F72B15233900485E8C /* MoviesListTableViewController.swift */; };
+		B0C344FA2B15233900485E8C /* MoviesListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C344F82B15233900485E8C /* MoviesListTableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		B0C344D22B14DA4900485E8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0C344E12B15138D00485E8C /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		B0C344E22B15138D00485E8C /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
+		B0C344F72B15233900485E8C /* MoviesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListTableViewController.swift; sourceTree = "<group>"; };
+		B0C344F82B15233900485E8C /* MoviesListTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesListTableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +60,7 @@
 		B0C344C02B14DA4700485E8C /* MarvelMoviesApp */ = {
 			isa = PBXGroup;
 			children = (
-				B0C344DB2B150E8000485E8C /* Application */,
+				B0C344C12B14DA4700485E8C /* AppDelegate.swift */,
 				B0C344DF2B15136800485E8C /* Presentation */,
 				B0C344DC2B150ED100485E8C /* Data */,
 				B0C344D92B150E3A00485E8C /* Resources */,
@@ -72,14 +76,6 @@
 				B0C344D22B14DA4900485E8C /* Info.plist */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		B0C344DB2B150E8000485E8C /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				B0C344C12B14DA4700485E8C /* AppDelegate.swift */,
-			);
-			path = Application;
 			sourceTree = "<group>";
 		};
 		B0C344DC2B150ED100485E8C /* Data */ = {
@@ -109,8 +105,8 @@
 		B0C344DF2B15136800485E8C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				B0C344E52B15153500485E8C /* Scences */,
-				B0C344E62B15153D00485E8C /* Utilis */,
+				B0C344E02B15137200485E8C /* Splash */,
+				B0C344F42B15231200485E8C /* MoviesList */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -124,35 +120,21 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
-		B0C344E52B15153500485E8C /* Scences */ = {
+		B0C344F42B15231200485E8C /* MoviesList */ = {
 			isa = PBXGroup;
 			children = (
-				B0C344E02B15137200485E8C /* Splash */,
+				B0C344F52B15231D00485E8C /* View */,
 			);
-			path = Scences;
+			path = MoviesList;
 			sourceTree = "<group>";
 		};
-		B0C344E62B15153D00485E8C /* Utilis */ = {
+		B0C344F52B15231D00485E8C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B0C344E72B15154B00485E8C /* Extensions */,
+				B0C344F72B15233900485E8C /* MoviesListTableViewController.swift */,
+				B0C344F82B15233900485E8C /* MoviesListTableViewController.xib */,
 			);
-			path = Utilis;
-			sourceTree = "<group>";
-		};
-		B0C344E72B15154B00485E8C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				B0C344E82B15155200485E8C /* UIKit */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		B0C344E82B15155200485E8C /* UIKit */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UIKit;
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0C344FA2B15233900485E8C /* MoviesListTableViewController.xib in Resources */,
 				B0C344D12B14DA4900485E8C /* LaunchScreen.storyboard in Resources */,
 				B0C344E42B15138D00485E8C /* SplashViewController.xib in Resources */,
 				B0C344CE2B14DA4900485E8C /* Assets.xcassets in Resources */,
@@ -226,6 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0C344F92B15233900485E8C /* MoviesListTableViewController.swift in Sources */,
 				B0C344E32B15138D00485E8C /* SplashViewController.swift in Sources */,
 				B0C344C22B14DA4700485E8C /* AppDelegate.swift in Sources */,
 				B0C344CC2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld in Sources */,

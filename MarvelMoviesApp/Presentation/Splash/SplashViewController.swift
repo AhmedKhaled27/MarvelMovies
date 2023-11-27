@@ -34,9 +34,11 @@ extension SplashViewController {
     }
     
     private func navigateToMovies() {
-        let moviesViewController = UIViewController()
-        moviesViewController.modalPresentationStyle = .fullScreen
-        moviesViewController.modalTransitionStyle = .crossDissolve
-        present(moviesViewController, animated: true)
+        let moviesViewController = MoviesListTableViewController()
+        let navigationController = UINavigationController(rootViewController: moviesViewController)
+        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.modalPresentationStyle = .fullScreen
+        navigationController.modalTransitionStyle = .crossDissolve
+        present(navigationController, animated: true)
     }
 }
