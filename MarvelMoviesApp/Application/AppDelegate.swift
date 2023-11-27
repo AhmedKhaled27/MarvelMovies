@@ -26,7 +26,7 @@ extension AppDelegate {
     private func setNewRoute() {
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        let splashViewController = UIViewController()
+        let splashViewController = SplashViewController()
         window?.rootViewController = splashViewController
         
         window?.makeKeyAndVisible()

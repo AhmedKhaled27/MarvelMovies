@@ -11,6 +11,8 @@
 		B0C344CC2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0C344CA2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld */; };
 		B0C344CE2B14DA4900485E8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0C344CD2B14DA4900485E8C /* Assets.xcassets */; };
 		B0C344D12B14DA4900485E8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0C344CF2B14DA4900485E8C /* LaunchScreen.storyboard */; };
+		B0C344E32B15138D00485E8C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C344E12B15138D00485E8C /* SplashViewController.swift */; };
+		B0C344E42B15138D00485E8C /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C344E22B15138D00485E8C /* SplashViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		B0C344CD2B14DA4900485E8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0C344D02B14DA4900485E8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B0C344D22B14DA4900485E8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0C344E12B15138D00485E8C /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		B0C344E22B15138D00485E8C /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				B0C344DB2B150E8000485E8C /* Application */,
+				B0C344DF2B15136800485E8C /* Presentation */,
 				B0C344DC2B150ED100485E8C /* Data */,
 				B0C344D92B150E3A00485E8C /* Resources */,
 			);
@@ -99,6 +104,55 @@
 				B0C344DD2B150ED800485E8C /* CoreDataStorage */,
 			);
 			path = PersistentStorages;
+			sourceTree = "<group>";
+		};
+		B0C344DF2B15136800485E8C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B0C344E52B15153500485E8C /* Scences */,
+				B0C344E62B15153D00485E8C /* Utilis */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B0C344E02B15137200485E8C /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				B0C344E12B15138D00485E8C /* SplashViewController.swift */,
+				B0C344E22B15138D00485E8C /* SplashViewController.xib */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		B0C344E52B15153500485E8C /* Scences */ = {
+			isa = PBXGroup;
+			children = (
+				B0C344E02B15137200485E8C /* Splash */,
+			);
+			path = Scences;
+			sourceTree = "<group>";
+		};
+		B0C344E62B15153D00485E8C /* Utilis */ = {
+			isa = PBXGroup;
+			children = (
+				B0C344E72B15154B00485E8C /* Extensions */,
+			);
+			path = Utilis;
+			sourceTree = "<group>";
+		};
+		B0C344E72B15154B00485E8C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B0C344E82B15155200485E8C /* UIKit */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B0C344E82B15155200485E8C /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0C344D12B14DA4900485E8C /* LaunchScreen.storyboard in Resources */,
+				B0C344E42B15138D00485E8C /* SplashViewController.xib in Resources */,
 				B0C344CE2B14DA4900485E8C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0C344E32B15138D00485E8C /* SplashViewController.swift in Sources */,
 				B0C344C22B14DA4700485E8C /* AppDelegate.swift in Sources */,
 				B0C344CC2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld in Sources */,
 			);
