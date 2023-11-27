@@ -182,7 +182,6 @@
 			);
 			mainGroup = B0C344B52B14DA4700485E8C;
 			packageReferences = (
-				B0C345092B15584C00485E8C /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = B0C344BF2B14DA4700485E8C /* Products */;
 			projectDirPath = "";
@@ -423,17 +422,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		B0C345092B15584C00485E8C /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		B0C344CA2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld */ = {
