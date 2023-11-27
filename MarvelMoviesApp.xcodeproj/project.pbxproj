@@ -52,13 +52,53 @@
 		B0C344C02B14DA4700485E8C /* MarvelMoviesApp */ = {
 			isa = PBXGroup;
 			children = (
-				B0C344C12B14DA4700485E8C /* AppDelegate.swift */,
+				B0C344DB2B150E8000485E8C /* Application */,
+				B0C344DC2B150ED100485E8C /* Data */,
+				B0C344D92B150E3A00485E8C /* Resources */,
+			);
+			path = MarvelMoviesApp;
+			sourceTree = "<group>";
+		};
+		B0C344D92B150E3A00485E8C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				B0C344CD2B14DA4900485E8C /* Assets.xcassets */,
 				B0C344CF2B14DA4900485E8C /* LaunchScreen.storyboard */,
 				B0C344D22B14DA4900485E8C /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B0C344DB2B150E8000485E8C /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				B0C344C12B14DA4700485E8C /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		B0C344DC2B150ED100485E8C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B0C344DE2B150F5600485E8C /* PersistentStorages */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B0C344DD2B150ED800485E8C /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
 				B0C344CA2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld */,
 			);
-			path = MarvelMoviesApp;
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		B0C344DE2B150F5600485E8C /* PersistentStorages */ = {
+			isa = PBXGroup;
+			children = (
+				B0C344DD2B150ED800485E8C /* CoreDataStorage */,
+			);
+			path = PersistentStorages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
