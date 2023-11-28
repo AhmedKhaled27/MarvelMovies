@@ -18,4 +18,11 @@ class MoviesRemoteDataService: APIService<MoviesEndPoint>, MoviesRemoteDataServi
                 objType: BaseResponse<MoviesDataResponse>.self,
                 completionHandler: completionHandler)
     }
+    
+    func searchMovies(page: Int, searchKey: String, completionHandler: @escaping ((Result<BaseResponse<MoviesDataResponse>, Error>) -> Void)) {
+        let offset = page == 1 ? 0 : (page * moviesLimt)
+        request(target: .searchMovies(limit: moviesLimt, offset: offset, searchKey: searchKey),
+                objType: BaseResponse<MoviesDataResponse>.self,
+                completionHandler: completionHandler)
+    }
 }

@@ -10,4 +10,7 @@ import Foundation
 protocol MovieRepository {
     func getMoviesList(page: Int,
                        completionHandler: @escaping ((Result<Movies, Error>) -> Void))
+    func searchMovies(page: Int,
+                      searchKey: String,
+                      completionHandler: @escaping ((Result<Movies, Error>) -> Void))
 }

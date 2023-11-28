@@ -34,4 +34,21 @@ extension MovieDataRespository: MovieRepository {
             }
         })
     }
+    
+    func searchMovies(page: Int, searchKey: String, completionHandler: @escaping ((Result<Movies, Error>) -> Void)) {
+        moviesRemoteDataService.searchMovies(page: page,
+                                             searchKey: searchKey,
+                                             completionHandler: { result in
+           switch result {
+           case let .success(responce):
+               guard let data = responce.data else {
+                   completionHandler(.failure("Cann't get movies data matching query"))
+                   return
+               }
+               completionHandler(.success(data.toDomain()))
+           case let .failure(error):
+               completionHandler(.failure(error))
+           }
+       })
+    }
 }

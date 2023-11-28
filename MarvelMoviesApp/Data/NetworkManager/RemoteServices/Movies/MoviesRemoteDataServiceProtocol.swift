@@ -10,4 +10,7 @@ import Foundation
 protocol MoviesRemoteDataServiceProtocol {
     func getMoviesList(page: Int,
                        completionHandler: @escaping ((Result<BaseResponse<MoviesDataResponse>, Error>) -> Void))
+    func searchMovies(page: Int,
+                      searchKey: String,
+                      completionHandler: @escaping ((Result<BaseResponse<MoviesDataResponse>, Error>) -> Void))
 }

@@ -10,6 +10,7 @@ import Moya
 
 enum MoviesEndPoint {
     case moviesList(limit: Int, offset: Int)
+    case searchMovies(limit: Int, offset: Int, searchKey: String)
 }
 
 extension MoviesEndPoint: TargetType {
@@ -17,13 +18,14 @@ extension MoviesEndPoint: TargetType {
     
     var path: String {
         switch self {
-        case .moviesList: return "/v1/public/series"
+        case .moviesList, .searchMovies: return "/v1/public/series"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .moviesList: return .get
+        case .searchMovies: return .get
         }
     }
     
@@ -33,6 +35,14 @@ extension MoviesEndPoint: TargetType {
             var params = MarvelAPI.defaultParameters
             params.updateValue(limit, forKey: "limit")
             params.updateValue(offset, forKey: "offset")
+            return .requestParameters(parameters: params,
+                                      encoding: URLEncoding.default)
+            
+        case let .searchMovies(limit, offset, searchKey):
+            var params = MarvelAPI.defaultParameters
+            params.updateValue(limit, forKey: "limit")
+            params.updateValue(offset, forKey: "offset")
+            params.updateValue(searchKey, forKey: "titleStartsWith")
             return .requestParameters(parameters: params,
                                       encoding: URLEncoding.default)
         }
