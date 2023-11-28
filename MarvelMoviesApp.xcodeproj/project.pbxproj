@@ -13,8 +13,8 @@
 		B0C344D12B14DA4900485E8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0C344CF2B14DA4900485E8C /* LaunchScreen.storyboard */; };
 		B0C344E32B15138D00485E8C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C344E12B15138D00485E8C /* SplashViewController.swift */; };
 		B0C344E42B15138D00485E8C /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C344E22B15138D00485E8C /* SplashViewController.xib */; };
-		B0C344F92B15233900485E8C /* MoviesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C344F72B15233900485E8C /* MoviesListTableViewController.swift */; };
-		B0C344FA2B15233900485E8C /* MoviesListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C344F82B15233900485E8C /* MoviesListTableViewController.xib */; };
+		B0C344F92B15233900485E8C /* MoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C344F72B15233900485E8C /* MoviesListViewController.swift */; };
+		B0C344FA2B15233900485E8C /* MoviesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C344F82B15233900485E8C /* MoviesListViewController.xib */; };
 		B0C345112B155A2500485E8C /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = B0C345102B155A2500485E8C /* Moya */; };
 		B0C345162B155B7800485E8C /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C345152B155B7800485E8C /* APIService.swift */; };
 		B0C3451A2B155C1100485E8C /* MoviesEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C345192B155C1100485E8C /* MoviesEndPoint.swift */; };
@@ -53,8 +53,8 @@
 		B0C344D22B14DA4900485E8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0C344E12B15138D00485E8C /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		B0C344E22B15138D00485E8C /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
-		B0C344F72B15233900485E8C /* MoviesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListTableViewController.swift; sourceTree = "<group>"; };
-		B0C344F82B15233900485E8C /* MoviesListTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesListTableViewController.xib; sourceTree = "<group>"; };
+		B0C344F72B15233900485E8C /* MoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewController.swift; sourceTree = "<group>"; };
+		B0C344F82B15233900485E8C /* MoviesListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesListViewController.xib; sourceTree = "<group>"; };
 		B0C345152B155B7800485E8C /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		B0C345192B155C1100485E8C /* MoviesEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesEndPoint.swift; sourceTree = "<group>"; };
 		B0C3451B2B155CB500485E8C /* MarvelAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelAPI.swift; sourceTree = "<group>"; };
@@ -193,8 +193,8 @@
 			isa = PBXGroup;
 			children = (
 				B0C345502B1594A000485E8C /* MovieCell */,
-				B0C344F72B15233900485E8C /* MoviesListTableViewController.swift */,
-				B0C344F82B15233900485E8C /* MoviesListTableViewController.xib */,
+				B0C344F72B15233900485E8C /* MoviesListViewController.swift */,
+				B0C344F82B15233900485E8C /* MoviesListViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -426,7 +426,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0C344FA2B15233900485E8C /* MoviesListTableViewController.xib in Resources */,
+				B0C344FA2B15233900485E8C /* MoviesListViewController.xib in Resources */,
 				B0C344D12B14DA4900485E8C /* LaunchScreen.storyboard in Resources */,
 				B0C344E42B15138D00485E8C /* SplashViewController.xib in Resources */,
 				B0C3455B2B15F4B400485E8C /* MovieSkeletonCell.xib in Resources */,
@@ -445,7 +445,7 @@
 				B0C345202B155DD900485E8C /* String+Extension.swift in Sources */,
 				B0C345472B15828000485E8C /* MoviesListViewModelProtocol.swift in Sources */,
 				B0C345412B157FD800485E8C /* GetMoviesListUseCase.swift in Sources */,
-				B0C344F92B15233900485E8C /* MoviesListTableViewController.swift in Sources */,
+				B0C344F92B15233900485E8C /* MoviesListViewController.swift in Sources */,
 				B0C345162B155B7800485E8C /* APIService.swift in Sources */,
 				B0C3452C2B156ED900485E8C /* BaseResponse.swift in Sources */,
 				B0C3453B2B157BCB00485E8C /* MovieRepository.swift in Sources */,

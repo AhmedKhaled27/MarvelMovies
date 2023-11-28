@@ -38,7 +38,7 @@ extension SplashViewController {
         let movieReposotiry = MovieDataRespository(moviesRemoteDataService: moviesRemoteDataService)
         let getMoviesListUseCase = GetMoviesListUseCase(movieRepository: movieReposotiry)
         let viewModel = MoviesListViewModel(getMoviesListUseCase: getMoviesListUseCase)
-        let moviesViewController = MoviesListTableViewController(viewModel: viewModel)
+        let moviesViewController = MoviesListViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: moviesViewController)
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.modalPresentationStyle = .fullScreen

@@ -17,10 +17,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZvK-9k-oDx">
-                        <rect key="frame" x="20" y="20" width="1880" height="500"/>
+                        <rect key="frame" x="20" y="20" width="360" height="120"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ijw-z4-npM">
-                                <rect key="frame" x="10" y="10" width="470" height="470"/>
+                                <rect key="frame" x="15" y="15" width="90" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ijw-z4-npM" secondAttribute="height" multiplier="1:1" id="DLQ-rs-Qdt"/>
                                 </constraints>
@@ -29,7 +29,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMt-iO-ZGN">
-                                <rect key="frame" x="510" y="234.66666666666666" width="1340" height="21"/>
+                                <rect key="frame" x="135" y="49.666666666666671" width="205" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -37,11 +37,14 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
                                         <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                                        <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCg-MI-WRz">
-                                <rect key="frame" x="510" y="449" width="1340" height="21"/>
+                                <rect key="frame" x="135" y="74" width="205" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -50,35 +53,38 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRX-eh-Qsa">
-                                <rect key="frame" x="510" y="20" width="1340" height="21"/>
+                                <rect key="frame" x="135" y="25" width="205" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
-                                        <real key="value" value="5"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                                        <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ijw-z4-npM" firstAttribute="leading" secondItem="ZvK-9k-oDx" secondAttribute="leading" constant="10" id="0iy-Q1-wwu"/>
-                            <constraint firstAttribute="height" constant="500" id="78v-iM-GdK"/>
+                            <constraint firstItem="ijw-z4-npM" firstAttribute="leading" secondItem="ZvK-9k-oDx" secondAttribute="leading" constant="15" id="0iy-Q1-wwu"/>
+                            <constraint firstAttribute="height" constant="120" id="78v-iM-GdK"/>
                             <constraint firstItem="vMt-iO-ZGN" firstAttribute="leading" secondItem="yRX-eh-Qsa" secondAttribute="leading" id="KA4-af-F4X"/>
                             <constraint firstItem="ijw-z4-npM" firstAttribute="bottom" secondItem="FCg-MI-WRz" secondAttribute="bottom" constant="10" id="N0o-7E-ExC"/>
                             <constraint firstItem="yRX-eh-Qsa" firstAttribute="top" secondItem="ijw-z4-npM" secondAttribute="top" constant="10" id="NHX-8z-XNw"/>
                             <constraint firstItem="yRX-eh-Qsa" firstAttribute="leading" secondItem="ijw-z4-npM" secondAttribute="trailing" constant="30" id="Red-q1-Gza"/>
                             <constraint firstItem="ijw-z4-npM" firstAttribute="width" secondItem="ZvK-9k-oDx" secondAttribute="width" multiplier="1:4" id="V84-oD-L3h"/>
                             <constraint firstItem="vMt-iO-ZGN" firstAttribute="centerY" secondItem="ijw-z4-npM" secondAttribute="centerY" id="YwT-wI-RCr"/>
-                            <constraint firstItem="ijw-z4-npM" firstAttribute="top" secondItem="ZvK-9k-oDx" secondAttribute="top" constant="10" id="fs2-kW-ojA"/>
+                            <constraint firstItem="ijw-z4-npM" firstAttribute="top" secondItem="ZvK-9k-oDx" secondAttribute="top" constant="15" id="fs2-kW-ojA"/>
                             <constraint firstItem="FCg-MI-WRz" firstAttribute="leading" secondItem="yRX-eh-Qsa" secondAttribute="leading" id="i3p-Vu-J3U"/>
-                            <constraint firstAttribute="trailing" secondItem="yRX-eh-Qsa" secondAttribute="trailing" constant="30" id="iNa-yL-XPh"/>
-                            <constraint firstAttribute="bottom" secondItem="ijw-z4-npM" secondAttribute="bottom" constant="20" id="j4i-pw-JsC"/>
+                            <constraint firstAttribute="trailing" secondItem="yRX-eh-Qsa" secondAttribute="trailing" constant="20" id="iNa-yL-XPh"/>
+                            <constraint firstAttribute="bottom" secondItem="ijw-z4-npM" secondAttribute="bottom" constant="15" id="j4i-pw-JsC"/>
                             <constraint firstItem="FCg-MI-WRz" firstAttribute="trailing" secondItem="yRX-eh-Qsa" secondAttribute="trailing" id="uwM-2c-mAB"/>
                             <constraint firstItem="yRX-eh-Qsa" firstAttribute="trailing" secondItem="vMt-iO-ZGN" secondAttribute="trailing" id="y8p-bv-sFX"/>
                         </constraints>

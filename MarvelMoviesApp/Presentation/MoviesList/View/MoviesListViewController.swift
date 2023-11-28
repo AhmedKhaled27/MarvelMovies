@@ -1,5 +1,5 @@
 //
-//  MoviesListTableViewController.swift
+//  MoviesListViewController.swift
 //  MarvelMoviesApp
 //
 //  Created by Ahmed Khaled on 27/11/2023.
@@ -8,7 +8,10 @@
 import UIKit
 import SkeletonView
 
-class MoviesListTableViewController: UITableViewController {
+class MoviesListViewController: UIViewController {
+    //MARK: OutLets
+    @IBOutlet weak var tableView: UITableView!
+    
     //MARK: Properites
     private var viewModel: MoviesListViewModelProtocol
     
@@ -22,7 +25,7 @@ class MoviesListTableViewController: UITableViewController {
     //MARK: Initialzer
     init(viewModel: MoviesListViewModelProtocol) {
         self.viewModel = viewModel
-        super.init(nibName: MoviesListTableViewController.className, bundle: nil)
+        super.init(nibName: MoviesListViewController.className, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -31,7 +34,7 @@ class MoviesListTableViewController: UITableViewController {
 }
 
 //MARK: Helper Functions
-extension MoviesListTableViewController {
+extension MoviesListViewController {
     private func setupUI() {
         setupNavigationBar()
     }
@@ -53,6 +56,8 @@ extension MoviesListTableViewController {
     }
     
     private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.isSkeletonable = true
         tableView.register(cellWithClass: MovieSkeletonCell.self)
@@ -60,7 +65,7 @@ extension MoviesListTableViewController {
 }
 
 //MARK: ViewModel
-extension MoviesListTableViewController {
+extension MoviesListViewController {
     private func setupViewModel() {
         bindLoading()
     }
@@ -70,8 +75,7 @@ extension MoviesListTableViewController {
             guard let self = self else { return }
             switch loading {
             case .none:
-//                self.tableView.hideSkeleton()
-                break
+                self.tableView.hideSkeleton()
                 
             case .fullScreen:
                 self.tableView.showAnimatedGradientSkeleton()
@@ -84,23 +88,29 @@ extension MoviesListTableViewController {
     }
 }
 
-//MARK: UITableViewDelegate - DataSource
-extension MoviesListTableViewController {
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//MARK: UITableViewDelegate
+extension MoviesListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
 }
 
-extension MoviesListTableViewController: SkeletonTableViewDataSource {
+//MARK: UITableViewDataSource
+extension MoviesListViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+}
+
+extension MoviesListViewController: SkeletonTableViewDataSource {
     
     func numSections(in collectionSkeletonView: UITableView) -> Int {
         return 1
