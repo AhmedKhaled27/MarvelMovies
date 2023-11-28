@@ -61,6 +61,7 @@ extension MoviesListViewController {
         tableView.separatorStyle = .none
         tableView.isSkeletonable = true
         tableView.register(cellWithClass: MovieSkeletonCell.self)
+        tableView.register(cellWithClass: MovieItemCell.self)
     }
 }
 
@@ -68,6 +69,7 @@ extension MoviesListViewController {
 extension MoviesListViewController {
     private func setupViewModel() {
         bindLoading()
+        bindMoviesResponseState()
     }
     
     private func bindLoading() {
@@ -86,6 +88,23 @@ extension MoviesListViewController {
             
         })
     }
+    
+    private func bindMoviesResponseState() {
+        viewModel.moviesResponseState.bind({ [weak self] responseState in
+            guard let self = self,
+                  let responseState = responseState else {return}
+            switch responseState {
+            case .success:
+                self.tableView.reloadData()
+            case let .failure(errorMessage: message):
+                break
+            }
+        })
+    }
+    
+    private func bindMoviesList() {
+        
+    }
 }
 
 //MARK: UITableViewDelegate
@@ -97,16 +116,16 @@ extension MoviesListViewController: UITableViewDelegate {
 
 //MARK: UITableViewDataSource
 extension MoviesListViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.numberOfItems
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withClass: MovieItemCell.self, for: indexPath)
+        if let cellViewModel = viewModel.getMovieCellViewModel(forCellAtIndex: indexPath.item) {
+            cell.viewModel = cellViewModel
+        }
+        return cell
     }
 }
 

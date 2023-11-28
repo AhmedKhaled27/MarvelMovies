@@ -22,7 +22,11 @@ class MoviesListViewModel {
     private let getMoviesListUseCase: GetMoviesList
     
     //MARK: Properites
-    private var moviesList: [Movie] = []
+    private var moviesList: [Movie] = [] {
+        didSet {
+            moviesCellsViewModels.value = moviesList.map({ MovieCellViewModel(movie: $0) })
+        }
+    }
     private var totalMovies = 0
     private var currentPage = 1
     private var hasMoreMovies: Bool {
@@ -31,6 +35,13 @@ class MoviesListViewModel {
     
     var loading: Observable<MoviesListViewModelLoading> = Observable(.none)
     var moviesResponseState: Observable<GetMoviesResponseState> = Observable(nil)
+    
+        //TableViewDataSource
+    var moviesCellsViewModels: Observable<[MovieCellViewModel]> = Observable(nil)
+    var numberOfItems: Int {
+        guard let movies = moviesCellsViewModels.value else { return 0 }
+        return movies.count
+    }
     
     //MARK: Initialzer
     init(getMoviesListUseCase: GetMoviesList) {
@@ -42,6 +53,11 @@ class MoviesListViewModel {
 extension MoviesListViewModel: MoviesListViewModelProtocol {
     func viewDidLoad() {
         getMoviesList()
+    }
+    
+        //TableView
+    func getMovieCellViewModel(forCellAtIndex index: Int) -> MovieCellViewModel? {
+        return moviesCellsViewModels.value?[index]
     }
 }
 
