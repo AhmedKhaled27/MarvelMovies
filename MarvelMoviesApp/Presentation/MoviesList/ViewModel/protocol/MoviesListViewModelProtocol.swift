@@ -22,6 +22,7 @@ protocol MoviesListViewModelProtocol {
         //TableView
     func getMovieCellViewModel(forCellAtIndex index: Int) -> MovieCellViewModel?
     func loadMoreMovies()
+    func didSelectMovieCell(atIndex index: Int)
         //SearchBar
     func didSearch(searchKey: String)
     func setSearchingIsEnabled(_ isEnabled: Bool)

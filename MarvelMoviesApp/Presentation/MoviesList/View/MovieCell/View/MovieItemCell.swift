@@ -12,14 +12,14 @@ class MovieItemCell: UITableViewCell {
     //MARK: IBOutLets
     @IBOutlet private var containerView: UIStackView! {
         didSet {
-            containerView.layer.cornerRadius = containerView.frame.height/8
+            containerView.layer.cornerRadius = 25
             containerView.layer.borderColor = AppColors.color_D83933.color.cgColor
             containerView.layer.borderWidth = 1
         }
     }
     @IBOutlet private var thumbnailImageView: UIImageView! {
         didSet {
-            thumbnailImageView.layer.cornerRadius = thumbnailImageView.frame.height/10
+            thumbnailImageView.layer.cornerRadius = 25
             thumbnailImageView.layer.borderColor = AppColors.color_D83933.color.cgColor
             thumbnailImageView.layer.borderWidth = 1
         }
@@ -27,6 +27,8 @@ class MovieItemCell: UITableViewCell {
     @IBOutlet private var nameLabel: UILabel!
 //    @IBOutlet private var dateLabel: UILabel!
     @IBOutlet private var ratingLabel: UILabel!
+        //Loading
+    @IBOutlet weak var loadingContainerView: UIView!
     
     //MARK: Properites
     var viewModel: MovieCellViewModel? {
@@ -52,6 +54,7 @@ class MovieItemCell: UITableViewCell {
 //        setupDateLabelWithDate(viewModel.data)
         setupRatingLabelWithRate(viewModel.rating)
         setupMovieImageWithURL(viewModel.movieThumbnailURL)
+        setupCmponentsForCellState(viewModel.cellState)
     }
     
     private func setupNameLabelWithName(_ name: String?) {
@@ -87,4 +90,15 @@ class MovieItemCell: UITableViewCell {
         thumbnailImageView.kf.setImage(with: imageURL)
     }
     
+    private func setupCmponentsForCellState(_ state: MovieCellState) {
+        switch state {
+        case .collapsed:
+            print("movie cell collapsed")
+            loadingContainerView.isHidden = true
+        case let .expanded(isLoading):
+            print("movie cell expanded and isLoading -> \(isLoading)")
+            loadingContainerView.isHidden = !isLoading
+        }
+        layoutIfNeeded()
+    }
 }

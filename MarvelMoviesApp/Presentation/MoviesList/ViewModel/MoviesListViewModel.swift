@@ -82,6 +82,17 @@ extension MoviesListViewModel: MoviesListViewModelProtocol {
                           loadingType: .nextPage)
         }
     }
+    
+    func didSelectMovieCell(atIndex index: Int) {
+        guard let moviesViewModels = moviesCellsViewModels.value else {return}
+        let currentState = moviesViewModels[index].cellState
+        var newState: MovieCellState = .collapsed
+        switch currentState {
+        case .collapsed: newState = .expanded(isLoading: true)
+        case .expanded: newState = .collapsed
+        }
+        moviesCellsViewModels.value?[index].updateCellState(newState: newState)
+    }
         //SearchBar
     func didSearch(searchKey: String) {
         resetPagesData()
