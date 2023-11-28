@@ -16,3 +16,7 @@ extension String {
         return stringHash
      }
 }
+
+extension String: LocalizedError {
+    public var errorDescription: String? { return self }
+}
