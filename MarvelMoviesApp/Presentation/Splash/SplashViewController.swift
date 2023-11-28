@@ -37,7 +37,9 @@ extension SplashViewController {
         let moviesRemoteDataService = MoviesRemoteDataService()
         let movieReposotiry = MovieDataRespository(moviesRemoteDataService: moviesRemoteDataService)
         let getMoviesListUseCase = GetMoviesListUseCase(movieRepository: movieReposotiry)
-        let viewModel = MoviesListViewModel(getMoviesListUseCase: getMoviesListUseCase)
+        let searchMoviesUseCase = SearchMoviesUseCase(movieRepository: movieReposotiry)
+        let viewModel = MoviesListViewModel(getMoviesListUseCase: getMoviesListUseCase,
+                                            searchMoviesUseCase: searchMoviesUseCase)
         let moviesViewController = MoviesListViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: moviesViewController)
         navigationController.navigationBar.prefersLargeTitles = true

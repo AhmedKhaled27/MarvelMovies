@@ -20,6 +20,7 @@ enum GetMoviesResponseState {
 class MoviesListViewModel {
     //MARK: UseCases
     private let getMoviesListUseCase: GetMoviesList
+    private let searchMoviesUseCase: SearchMovies
     
     //MARK: Properites
     private var moviesList: [Movie] = [] {
@@ -42,10 +43,15 @@ class MoviesListViewModel {
         guard let movies = moviesCellsViewModels.value else { return 0 }
         return movies.count
     }
+        //SearchBar
+    var searchKey: Observable<String> = Observable(nil)
+    private var isSearchingEnabled = false
     
     //MARK: Initialzer
-    init(getMoviesListUseCase: GetMoviesList) {
+    init(getMoviesListUseCase: GetMoviesList,
+         searchMoviesUseCase: SearchMovies) {
         self.getMoviesListUseCase = getMoviesListUseCase
+        self.searchMoviesUseCase = searchMoviesUseCase
     }
 }
 
@@ -63,9 +69,37 @@ extension MoviesListViewModel: MoviesListViewModelProtocol {
     func loadMoreMovies() {
         guard loading.value == .none,
               hasMoreMovies else { return }
-        currentPage += 1
-        getMoviesList(page: currentPage,
-                      loadingType: .nextPage)
+        if isSearchingEnabled,
+           let searchKey = searchKey.value,
+           !searchKey.isEmpty {
+            currentPage += 1
+            searchMovies(page: currentPage,
+                         searchKey: searchKey,
+                         loadingType: .nextPage)
+        }else {
+            currentPage += 1
+            getMoviesList(page: currentPage,
+                          loadingType: .nextPage)
+        }
+    }
+        //SearchBar
+    func didSearch(searchKey: String) {
+        resetPagesData()
+        self.searchKey.value = searchKey
+        searchMovies(page: currentPage,
+                     searchKey: searchKey,
+                     loadingType: .fullScreen)
+    }
+    
+    func setSearchingIsEnabled(_ isEnabled: Bool) {
+        isSearchingEnabled = isEnabled
+        searchKey.value = .none
+        if !isEnabled {
+            resetPagesData()
+            getMoviesList(page: currentPage,
+                          loadingType: .fullScreen)
+        }
+        
     }
 }
 
@@ -92,5 +126,37 @@ extension MoviesListViewModel {
                 if self.currentPage != 1 { self.currentPage -= 1 }
             }
         }
+    }
+    
+    private func searchMovies(page: Int,
+                              searchKey: String,
+                              loadingType: MoviesListViewModelLoading) {
+        loading.value = loadingType
+        searchMoviesUseCase.execute(page: page,
+                                    searchKey: searchKey,
+                                    completionHandler: { [weak self] result in
+            guard let self = self else {return}
+            self.loading.value = .none
+            switch result {
+            case let .success(response):
+                defer { self.moviesResponseState.value = .success }
+                if let movies = response.movies,
+                   !movies.isEmpty {
+                    self.moviesList.append(contentsOf: movies)
+                }
+                self.totalMovies = response.total ?? 0
+                
+            case .failure(_):
+                let message = "Failed to get movies matching query"
+                self.moviesResponseState.value = .failure(errorMessage: message)
+                if self.currentPage != 1 { self.currentPage -= 1 }
+            }
+        })
+    }
+    
+    private func resetPagesData() {
+        currentPage = 1
+        totalMovies = 0
+        moviesList = []
     }
 }

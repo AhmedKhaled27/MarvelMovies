@@ -14,10 +14,15 @@ protocol MoviesListViewModelProtocol {
         //TableViewDataSource
     var moviesCellsViewModels: Observable<[MovieCellViewModel]> {get set}
     var numberOfItems: Int {get}
+        //SearchBar
+    var searchKey: Observable<String> {get set}
     
     //Functions
     func viewDidLoad()
         //TableView
     func getMovieCellViewModel(forCellAtIndex index: Int) -> MovieCellViewModel?
     func loadMoreMovies()
+        //SearchBar
+    func didSearch(searchKey: String)
+    func setSearchingIsEnabled(_ isEnabled: Bool)
 }

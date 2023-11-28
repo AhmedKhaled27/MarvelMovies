@@ -8,14 +8,15 @@
 import UIKit
 import SkeletonView
 
-class MoviesListViewController: UIViewController {
+class MoviesListViewController: BaseViewController {
     //MARK: OutLets
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: Properites
     private var viewModel: MoviesListViewModelProtocol
     
-    var nextPageLoadingSpinner: UIActivityIndicatorView?
+    private var nextPageLoadingSpinner: UIActivityIndicatorView?
+    private lazy var searchController = UISearchController(searchResultsController: nil)
 
     //MARK: ViewLifeCycle
     override func viewDidLoad() {
@@ -42,16 +43,16 @@ extension MoviesListViewController {
     }
     
     private func setupNavigationBar() {
-        title = "Movies List"
+        title = "Movies"
         setupNavigationItemSearchBar()
         setupTableView()
         setupViewModel()
     }
     
     private func setupNavigationItemSearchBar() {
-        let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.tintColor = AppColors.color_D83933.color
-        //        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
         navigationItem.searchController?.searchBar.placeholder = "search movies"
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -65,6 +66,12 @@ extension MoviesListViewController {
         tableView.register(cellWithClass: MovieSkeletonCell.self)
         tableView.register(cellWithClass: MovieItemCell.self)
     }
+    
+    private func scrollToTableViewTop() {
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0),
+                                   at: .top,
+                                   animated: false)
+    }
 }
 
 //MARK: ViewModel
@@ -72,6 +79,8 @@ extension MoviesListViewController {
     private func setupViewModel() {
         bindLoading()
         bindMoviesResponseState()
+        bindSearchKey()
+        bindMoviesList()
     }
     
     private func bindLoading() {
@@ -80,7 +89,7 @@ extension MoviesListViewController {
             switch loading {
             case .none:
                 self.tableView.hideSkeleton()
-//                self.tableView.tableFooterView = nil
+                self.tableView.tableFooterView = nil
                 
             case .fullScreen:
                 self.tableView.showAnimatedGradientSkeleton()
@@ -94,26 +103,6 @@ extension MoviesListViewController {
         })
     }
     
-    func makeActivityIndicator(size: CGSize) -> UIActivityIndicatorView {
-        let style: UIActivityIndicatorView.Style
-        if #available(iOS 12.0, *) {
-            if self.traitCollection.userInterfaceStyle == .dark {
-                style = .white
-            } else {
-                style = .gray
-            }
-        } else {
-            style = .gray
-        }
-
-        let activityIndicator = UIActivityIndicatorView(style: style)
-        activityIndicator.startAnimating()
-        activityIndicator.isHidden = false
-        activityIndicator.frame = .init(origin: .zero, size: size)
-
-        return activityIndicator
-    }
-    
     private func bindMoviesResponseState() {
         viewModel.moviesResponseState.bind({ [weak self] responseState in
             guard let self = self,
@@ -122,15 +111,25 @@ extension MoviesListViewController {
             case .success:
                 self.tableView.reloadData()
             case let .failure(errorMessage: message):
-                break
+                self.showErrorAlert(string: message)
             }
         })
     }
     
     private func bindMoviesList() {
-        
+        viewModel.moviesCellsViewModels.bind({ [weak self] _ in
+            guard let self = self else {return}
+            self.tableView.reloadData()
+        })
     }
     
+    private func bindSearchKey() {
+        viewModel.searchKey.bind({ [weak self] searchKey in
+            guard let self = self,
+                  let searchKey = searchKey else {return}
+            self.searchController.searchBar.text = searchKey
+        })
+    }
 }
 
 //MARK: UITableViewDelegate
@@ -163,6 +162,7 @@ extension MoviesListViewController: UITableViewDataSource {
     }
 }
 
+//MARK: SkeletonTableViewDataSource
 extension MoviesListViewController: SkeletonTableViewDataSource {
     
     func numSections(in collectionSkeletonView: UITableView) -> Int {
@@ -177,4 +177,31 @@ extension MoviesListViewController: SkeletonTableViewDataSource {
         return MovieSkeletonCell.className
     }
     
+}
+
+//MARK: conform to UISearchBarDelegate
+extension MoviesListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text,
+              !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        viewModel.didSearch(searchKey: searchText)
+        scrollToTableViewTop()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.setSearchingIsEnabled(false)
+        scrollToTableViewTop()
+    }
+}
+
+extension MoviesListViewController: UISearchControllerDelegate {
+    func willPresentSearchController(_ searchController: UISearchController) {
+        viewModel.setSearchingIsEnabled(true)
+        scrollToTableViewTop()
+    }
+
+    func willDismissSearchController(_ searchController: UISearchController) {
+        viewModel.setSearchingIsEnabled(false)
+        scrollToTableViewTop()
+    }
 }
