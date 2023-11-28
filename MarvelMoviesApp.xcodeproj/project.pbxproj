@@ -112,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				B0C345252B15651100485E8C /* Entites */,
+				B0C345132B155A6A00485E8C /* NetworkManager */,
 				B0C344DE2B150F5600485E8C /* PersistentStorages */,
 			);
 			path = Data;
@@ -128,7 +129,6 @@
 		B0C344DE2B150F5600485E8C /* PersistentStorages */ = {
 			isa = PBXGroup;
 			children = (
-				B0C345132B155A6A00485E8C /* NetworkManager */,
 				B0C344DD2B150ED800485E8C /* CoreDataStorage */,
 			);
 			path = PersistentStorages;
@@ -173,8 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				B0C345152B155B7800485E8C /* APIService.swift */,
-				B0C345172B155BE000485E8C /* RemoteServices */,
 				B0C3451B2B155CB500485E8C /* MarvelAPI.swift */,
+				B0C345172B155BE000485E8C /* RemoteServices */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";

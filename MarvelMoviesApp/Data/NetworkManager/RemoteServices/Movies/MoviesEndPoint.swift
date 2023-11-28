@@ -33,9 +33,6 @@ extension MoviesEndPoint: TargetType {
             var params = MarvelAPI.defaultParameters
             params.updateValue(limit, forKey: "limit")
             params.updateValue(offset, forKey: "offset")
-            
-            debugPrint(params)
-            
             return .requestParameters(parameters: params,
                                       encoding: URLEncoding.default)
         }
