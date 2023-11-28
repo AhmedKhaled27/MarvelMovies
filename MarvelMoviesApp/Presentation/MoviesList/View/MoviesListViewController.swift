@@ -15,13 +15,15 @@ class MoviesListViewController: UIViewController {
     //MARK: Properites
     private var viewModel: MoviesListViewModelProtocol
     
+    var nextPageLoadingSpinner: UIActivityIndicatorView?
+
     //MARK: ViewLifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         viewModel.viewDidLoad()
     }
-  
+    
     //MARK: Initialzer
     init(viewModel: MoviesListViewModelProtocol) {
         self.viewModel = viewModel
@@ -48,7 +50,7 @@ extension MoviesListViewController {
     
     private func setupNavigationItemSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.tintColor = .red
+        searchController.searchBar.tintColor = AppColors.color_D83933.color
         //        searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
         navigationItem.searchController?.searchBar.placeholder = "search movies"
@@ -78,15 +80,38 @@ extension MoviesListViewController {
             switch loading {
             case .none:
                 self.tableView.hideSkeleton()
+//                self.tableView.tableFooterView = nil
                 
             case .fullScreen:
                 self.tableView.showAnimatedGradientSkeleton()
                 
             case .nextPage:
-                break
+                self.nextPageLoadingSpinner?.removeFromSuperview()
+                self.nextPageLoadingSpinner = self.makeActivityIndicator(size: .init(width: self.tableView.frame.width, height: 44))
+                self.tableView.tableFooterView = self.nextPageLoadingSpinner
             }
             
         })
+    }
+    
+    func makeActivityIndicator(size: CGSize) -> UIActivityIndicatorView {
+        let style: UIActivityIndicatorView.Style
+        if #available(iOS 12.0, *) {
+            if self.traitCollection.userInterfaceStyle == .dark {
+                style = .white
+            } else {
+                style = .gray
+            }
+        } else {
+            style = .gray
+        }
+
+        let activityIndicator = UIActivityIndicatorView(style: style)
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+        activityIndicator.frame = .init(origin: .zero, size: size)
+
+        return activityIndicator
     }
     
     private func bindMoviesResponseState() {
@@ -105,6 +130,7 @@ extension MoviesListViewController {
     private func bindMoviesList() {
         
     }
+    
 }
 
 //MARK: UITableViewDelegate
@@ -126,6 +152,14 @@ extension MoviesListViewController: UITableViewDataSource {
             cell.viewModel = cellViewModel
         }
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        
+        if (offsetY > tableView.contentSize.height-50 - scrollView.frame.size.height)  {
+            viewModel.loadMoreMovies()
+        }
     }
 }
 

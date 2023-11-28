@@ -19,4 +19,5 @@ protocol MoviesListViewModelProtocol {
     func viewDidLoad()
         //TableView
     func getMovieCellViewModel(forCellAtIndex index: Int) -> MovieCellViewModel?
+    func loadMoreMovies()
 }

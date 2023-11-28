@@ -44,6 +44,8 @@
 		B0C3455E2B15F70D00485E8C /* UITableView+Exetension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C3455D2B15F70D00485E8C /* UITableView+Exetension.swift */; };
 		B0C345622B15FF2E00485E8C /* MovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C345612B15FF2E00485E8C /* MovieCellViewModel.swift */; };
 		B0C345652B16058900485E8C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B0C345642B16058900485E8C /* Kingfisher */; };
+		B0C345682B1617FA00485E8C /* AppColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0C345672B1617FA00485E8C /* AppColors.xcassets */; };
+		B0C3456A2B161D6500485E8C /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C345692B161D6500485E8C /* AppColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +85,8 @@
 		B0C345592B15F4B400485E8C /* MovieSkeletonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieSkeletonCell.xib; sourceTree = "<group>"; };
 		B0C3455D2B15F70D00485E8C /* UITableView+Exetension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Exetension.swift"; sourceTree = "<group>"; };
 		B0C345612B15FF2E00485E8C /* MovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellViewModel.swift; sourceTree = "<group>"; };
+		B0C345672B1617FA00485E8C /* AppColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppColors.xcassets; sourceTree = "<group>"; };
+		B0C345692B161D6500485E8C /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,7 @@
 		B0C344D92B150E3A00485E8C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B0C345662B1617E900485E8C /* AppColors */,
 				B0C344CD2B14DA4900485E8C /* Assets.xcassets */,
 				B0C344CF2B14DA4900485E8C /* LaunchScreen.storyboard */,
 				B0C344D22B14DA4900485E8C /* Info.plist */,
@@ -381,6 +386,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		B0C345662B1617E900485E8C /* AppColors */ = {
+			isa = PBXGroup;
+			children = (
+				B0C345672B1617FA00485E8C /* AppColors.xcassets */,
+				B0C345692B161D6500485E8C /* AppColors.swift */,
+			);
+			path = AppColors;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -450,6 +464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0C344FA2B15233900485E8C /* MoviesListViewController.xib in Resources */,
+				B0C345682B1617FA00485E8C /* AppColors.xcassets in Resources */,
 				B0C344D12B14DA4900485E8C /* LaunchScreen.storyboard in Resources */,
 				B0C344E42B15138D00485E8C /* SplashViewController.xib in Resources */,
 				B0C3455B2B15F4B400485E8C /* MovieSkeletonCell.xib in Resources */,
@@ -482,6 +497,7 @@
 				B0C345302B15783D00485E8C /* MovieImageData.swift in Sources */,
 				B0C345382B1579DB00485E8C /* Movies.swift in Sources */,
 				B0C3455A2B15F4B400485E8C /* MovieSkeletonCell.swift in Sources */,
+				B0C3456A2B161D6500485E8C /* AppColors.swift in Sources */,
 				B0C3451A2B155C1100485E8C /* MoviesEndPoint.swift in Sources */,
 				B0C344C22B14DA4700485E8C /* AppDelegate.swift in Sources */,
 				B0C345622B15FF2E00485E8C /* MovieCellViewModel.swift in Sources */,

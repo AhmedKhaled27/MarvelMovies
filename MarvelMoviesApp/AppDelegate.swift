@@ -39,16 +39,16 @@ extension AppDelegate {
        if #available(iOS 15, *) {
            let appearance = UINavigationBarAppearance()
            appearance.configureWithOpaqueBackground()
-           appearance.titleTextAttributes = [.foregroundColor: UIColor.red]
-           appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.red]
+           appearance.titleTextAttributes = [.foregroundColor: AppColors.color_D83933.color]
+           appearance.largeTitleTextAttributes = [.foregroundColor: AppColors.color_D83933.color]
            appearance.backgroundColor = UIColor.white
            UINavigationBar.appearance().standardAppearance = appearance
            UINavigationBar.appearance().scrollEdgeAppearance = appearance
        } else {
            UINavigationBar.appearance().barTintColor = .white
-           UINavigationBar.appearance().tintColor = .red
-           UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
-           UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+           UINavigationBar.appearance().tintColor = AppColors.color_D83933.color
+           UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: AppColors.color_D83933.color]
+           UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: AppColors.color_D83933.color]
        }
    }
 }

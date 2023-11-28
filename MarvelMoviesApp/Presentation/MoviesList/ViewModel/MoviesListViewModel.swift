@@ -52,19 +52,28 @@ class MoviesListViewModel {
 //MARK: Conform to MoviesListViewModel
 extension MoviesListViewModel: MoviesListViewModelProtocol {
     func viewDidLoad() {
-        getMoviesList()
+        getMoviesList(page: currentPage,
+                      loadingType: .fullScreen)
     }
-    
         //TableView
     func getMovieCellViewModel(forCellAtIndex index: Int) -> MovieCellViewModel? {
         return moviesCellsViewModels.value?[index]
+    }
+    
+    func loadMoreMovies() {
+        guard loading.value == .none,
+              hasMoreMovies else { return }
+        currentPage += 1
+        getMoviesList(page: currentPage,
+                      loadingType: .nextPage)
     }
 }
 
 //MARK: Private Functions
 extension MoviesListViewModel {
-    private func getMoviesList() {
-        loading.value = .fullScreen
+    private func getMoviesList(page: Int,
+                               loadingType: MoviesListViewModelLoading) {
+        loading.value = loadingType
         getMoviesListUseCase.execute(page: currentPage) { [weak self] result in
             guard let self = self else {return}
             self.loading.value = .none
@@ -80,6 +89,7 @@ extension MoviesListViewModel {
             case .failure(_):
                 let message = "Failed to get movies data"
                 self.moviesResponseState.value = .failure(errorMessage: message)
+                if self.currentPage != 1 { self.currentPage -= 1 }
             }
         }
     }

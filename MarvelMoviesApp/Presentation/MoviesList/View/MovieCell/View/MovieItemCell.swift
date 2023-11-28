@@ -13,14 +13,14 @@ class MovieItemCell: UITableViewCell {
     @IBOutlet private var containerView: UIStackView! {
         didSet {
             containerView.layer.cornerRadius = containerView.frame.height/8
-            containerView.layer.borderColor = UIColor.red.cgColor
+            containerView.layer.borderColor = AppColors.color_D83933.color.cgColor
             containerView.layer.borderWidth = 1
         }
     }
     @IBOutlet private var thumbnailImageView: UIImageView! {
         didSet {
             thumbnailImageView.layer.cornerRadius = thumbnailImageView.frame.height/10
-            thumbnailImageView.layer.borderColor = UIColor.red.cgColor
+            thumbnailImageView.layer.borderColor = AppColors.color_D83933.color.cgColor
             thumbnailImageView.layer.borderWidth = 1
         }
     }
@@ -38,6 +38,11 @@ class MovieItemCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         setupViewModel()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailImageView.image = nil
     }
     
     //MARK: Helper Functions
