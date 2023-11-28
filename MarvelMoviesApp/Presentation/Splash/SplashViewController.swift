@@ -24,10 +24,10 @@ class SplashViewController: UIViewController {
 extension SplashViewController {
     private func setupLogoImageAnimation() {
         logoImageView.alpha = 0.0
-        UIView.animate(withDuration: 3.0, animations: {
+        UIView.animate(withDuration: 2.0, animations: {
             self.logoImageView.alpha = 1.0
         }) { (completed) in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.navigateToMovies()
             }
         }
