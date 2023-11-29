@@ -20,7 +20,7 @@ class CreatorCell: UICollectionViewCell {
     @IBOutlet weak var creatorNameLabel: UILabel!
     @IBOutlet weak var creatorRoleLabel: UILabel!
     
-    //MARK: Properites
+    //MARK: Properties
     var viewModel: CreatorCellViewModel? {
         didSet { setupViewModel() }
     }

@@ -59,10 +59,10 @@ class MovieItemCell: UITableViewCell {
     private func setupUI() {
         selectionStyle = .none
         setupCreatorsCollectionView()
-        setupTitels()
+        setupTitles()
     }
     
-    private func setupTitels() {
+    private func setupTitles() {
         noCreatorsLabel.text = "Movie doesn't have creators"
     }
     
@@ -118,7 +118,7 @@ extension MovieItemCell {
     //    private func setupDateLabelWithDate(_ date: Int?) {
     //        if let date = date {
     //            dateLabel.isHidden = false
-    //            dateLabel.text = "relase date: \(date)"
+    //            dateLabel.text = "release date: \(date)"
     //        }else {
     //            dateLabel.isHidden = true
     //        }

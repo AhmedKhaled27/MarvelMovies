@@ -12,7 +12,7 @@ class MoviesListViewController: BaseViewController {
     //MARK: OutLets
     @IBOutlet weak var tableView: UITableView!
     
-    //MARK: Properites
+    //MARK: Properties
     private var viewModel: MoviesListViewModelProtocol
     
     private var nextPageLoadingSpinner: UIActivityIndicatorView?
@@ -25,7 +25,7 @@ class MoviesListViewController: BaseViewController {
         viewModel.viewDidLoad()
     }
     
-    //MARK: Initialzer
+    //MARK: Initializer
     init(viewModel: MoviesListViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: MoviesListViewController.className, bundle: nil)
