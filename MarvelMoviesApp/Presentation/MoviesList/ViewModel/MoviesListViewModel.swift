@@ -111,12 +111,30 @@ extension MoviesListViewModel: MoviesListViewModelProtocol {
     
     func didSelectMovieCell(atIndex index: Int) {
         let currentState = moviesCellsViewModels[index].cellState
-        var newState: MovieCellState = .collapsed
         switch currentState {
-        case .collapsed: newState = .expanded(isLoading: true)
-        case .expanded: newState = .collapsed
+        case .collapsed:
+            moviesCellsViewModels[index]
+                .updateCellState(newState: .expanded(isLoading: true))
+            
+            guard let movieId = moviesList[index].id else { return }
+            getMovieDetailsById(movieId: movieId,
+                                completionHander: { [weak self] movieDetails in
+                guard let self = self,
+                      let movieDetails = movieDetails,
+                      let movieDetailsId = movieDetails.id,
+                      index < self.moviesList.count,
+                      movieDetailsId == self.moviesList[index].id else { return }
+                
+                
+                self.moviesCellsViewModels[index].detailsViewModel = MovieDetailsViewModel(movieDetails: movieDetails)
+                self.moviesCellsViewModels[index].updateCellState(newState: .expanded(isLoading: false))
+                self.selectedMovieIndex.value = index
+            })
+
+        case .expanded:
+            moviesCellsViewModels[index]
+                .updateCellState(newState: .collapsed)
         }
-        moviesCellsViewModels[index].updateCellState(newState: newState)
         selectedMovieIndex.value = index
     }
         //SearchBar

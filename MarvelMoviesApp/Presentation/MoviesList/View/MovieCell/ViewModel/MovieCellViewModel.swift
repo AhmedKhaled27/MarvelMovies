@@ -18,12 +18,15 @@ struct MovieCellViewModel {
     var data: Int?
     var rating: String?
     private(set) var cellState: MovieCellState = .collapsed
+    var detailsViewModel: MovieDetailsViewModel?
     
-    init(movie: Movie) {
+    init(movie: Movie,
+         detailsViewModel: MovieDetailsViewModel? = nil) {
         self.movieName = movie.name
         self.movieThumbnailURL = movie.image?.imageURL
         self.data = movie.startYear
         self.rating = movie.rating
+        self.detailsViewModel = detailsViewModel
     }
     
     mutating func updateCellState(newState: MovieCellState) {

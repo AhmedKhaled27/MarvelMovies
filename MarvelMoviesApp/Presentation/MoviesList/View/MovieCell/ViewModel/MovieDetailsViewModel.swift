@@ -8,9 +8,10 @@
 import Foundation
 
 struct MovieDetailsViewModel {
-    var id: Int?
+    var description: String?
+
     
     init(movieDetails: MovieDetails) {
-        self.id = movieDetails.id
+        self.description = movieDetails.descroption
     }
 }

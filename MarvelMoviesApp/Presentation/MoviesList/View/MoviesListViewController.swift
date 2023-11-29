@@ -68,9 +68,11 @@ extension MoviesListViewController {
     }
     
     private func scrollToTableViewTop() {
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0),
-                                   at: .top,
-                                   animated: false)
+        if viewModel.numberOfItems > 0 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0),
+                                       at: .top,
+                                       animated: false)
+        }
     }
 }
 
@@ -128,8 +130,10 @@ extension MoviesListViewController {
         viewModel.selectedMovieIndex.bind({ [weak self] index in
             guard let self = self,
                   let index = index else {return}
-            self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)],
-                                      with: .automatic)
+            UIView.performWithoutAnimation {
+                self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)],
+                                          with: .automatic)
+            }
         })
     }
 }
@@ -152,10 +156,6 @@ extension MoviesListViewController: UITableViewDataSource {
         if let cellViewModel = viewModel.getMovieCellViewModel(forCellAtIndex: indexPath.item) {
             cell.viewModel = cellViewModel
         }
-        viewModel.getMovieDetailsViewModel(forMovieAtIndex: indexPath.row,
-                                           completionHander: { movieDetails in
-            cell.detailsViewModel = movieDetails
-        })
         return cell
     }
     

@@ -25,20 +25,19 @@ class MovieItemCell: UITableViewCell {
         }
     }
     @IBOutlet private var nameLabel: UILabel!
-//    @IBOutlet private var dateLabel: UILabel!
+    //    @IBOutlet private var dateLabel: UILabel!
     @IBOutlet private var ratingLabel: UILabel!
-        //Loading
+    //Loading
     @IBOutlet weak var loadingContainerView: UIView!
     @IBOutlet weak var movieDetailsContainerView: UIView!
+    //Description
+    
+    @IBOutlet weak var descriptionStackView: UIStackView!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     //MARK: Properites
     var viewModel: MovieCellViewModel? {
         didSet { setupViewModel() }
-    }
-    var detailsViewModel: MovieDetailsViewModel? {
-        didSet {
-            setupMovieDetailsViewModel()
-        }
     }
     
     //MARK: Properites
@@ -57,10 +56,11 @@ class MovieItemCell: UITableViewCell {
     private func setupViewModel() {
         guard let viewModel = viewModel else { return }
         setupNameLabelWithName(viewModel.movieName)
-//        setupDateLabelWithDate(viewModel.data)
+        //        setupDateLabelWithDate(viewModel.data)
         setupRatingLabelWithRate(viewModel.rating)
         setupMovieImageWithURL(viewModel.movieThumbnailURL)
-        setupCmponentsForCellState(viewModel.cellState)
+        setupComponentsForCellState(viewModel.cellState)
+        setupMovieDetailsViewModel(detailsViewModel: viewModel.detailsViewModel)
     }
     
     private func setupNameLabelWithName(_ name: String?) {
@@ -73,14 +73,14 @@ class MovieItemCell: UITableViewCell {
         }
     }
     
-//    private func setupDateLabelWithDate(_ date: Int?) {
-//        if let date = date {
-//            dateLabel.isHidden = false
-//            dateLabel.text = "relase date: \(date)"
-//        }else {
-//            dateLabel.isHidden = true
-//        }
-//    }
+    //    private func setupDateLabelWithDate(_ date: Int?) {
+    //        if let date = date {
+    //            dateLabel.isHidden = false
+    //            dateLabel.text = "relase date: \(date)"
+    //        }else {
+    //            dateLabel.isHidden = true
+    //        }
+    //    }
     
     private func setupRatingLabelWithRate(_ rate: String?) {
         if let rate = rate {
@@ -96,25 +96,39 @@ class MovieItemCell: UITableViewCell {
         thumbnailImageView.kf.setImage(with: imageURL)
     }
     
-    private func setupCmponentsForCellState(_ state: MovieCellState) {
+    private func setupComponentsForCellState(_ state: MovieCellState) {
         switch state {
         case .collapsed:
-            print("movie cell collapsed")
             loadingContainerView.isHidden = true
             movieDetailsContainerView.isHidden = true
+            
         case let .expanded(isLoading):
-            print("movie cell expanded and isLoading -> \(isLoading)")
             loadingContainerView.isHidden = !isLoading
             movieDetailsContainerView.isHidden = isLoading
+            
         }
         layoutIfNeeded()
     }
 }
 
 extension MovieItemCell {
-    private func setupMovieDetailsViewModel() {
-        guard let viewModel = viewModel,
-        let detailsViewModel = detailsViewModel else { return }
+    private func setupMovieDetailsViewModel(detailsViewModel: MovieDetailsViewModel?) {
         
+        guard let detailsViewModel = detailsViewModel else {
+            movieDetailsContainerView.isHidden = true
+            return
+        }
+        
+        setupMovieDescription(detailsViewModel.description)
+    }
+    
+    private func setupMovieDescription(_ description: String?) {
+        if let description = description,
+           !description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            descriptionStackView.isHidden = false
+            descriptionLabel.text = description
+        }else {
+            descriptionLabel.text = "Movie doesn't have a description."
+        }
     }
 }

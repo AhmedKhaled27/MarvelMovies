@@ -49,7 +49,7 @@ extension MoviesEndPoint: TargetType {
             return .requestParameters(parameters: params,
                                       encoding: URLEncoding.default)
             
-        case let .movieDetails(movieId):
+        case .movieDetails:
             let params = MarvelAPI.defaultParameters
             return .requestParameters(parameters: params,
                                       encoding: URLEncoding.default)
