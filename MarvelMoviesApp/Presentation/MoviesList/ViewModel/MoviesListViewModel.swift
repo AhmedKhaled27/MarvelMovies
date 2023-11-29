@@ -46,6 +46,7 @@ class MoviesListViewModel {
     //SearchBar
     var searchKey: Observable<String> = Observable(nil)
     private var isSearchingEnabled = false
+    private var didSearchUsed = false
     
 }
 
@@ -109,6 +110,7 @@ extension MoviesListViewModel: MoviesListViewModelProtocol {
     func didSearch(searchKey: String) {
         guard searchKey != self.searchKey.value else {return}
         resetPagesData()
+        didSearchUsed = true
         self.searchKey.value = searchKey
         if !searchKey.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             searchMovies(page: currentPage,
@@ -123,7 +125,8 @@ extension MoviesListViewModel: MoviesListViewModelProtocol {
     func setSearchingIsEnabled(_ isEnabled: Bool) {
         isSearchingEnabled = isEnabled
         searchKey.value = .none
-        if !isEnabled {
+        if !isEnabled && didSearchUsed {
+            didSearchUsed = false
             resetPagesData()
             getMoviesList(page: currentPage,
                           loadingType: .fullScreen)
