@@ -12,8 +12,8 @@ protocol MoviesListViewModelProtocol {
     var loading: Observable<MoviesListViewModelLoading> {get set}
     var moviesResponseState: Observable<GetMoviesResponseState> {get set}
         //TableViewDataSource
-    var moviesCellsViewModels: Observable<[MovieCellViewModel]> {get set}
     var numberOfItems: Int {get}
+    var selectedMovieIndex: Observable<Int> {get set}
         //SearchBar
     var searchKey: Observable<String> {get set}
     
@@ -21,6 +21,8 @@ protocol MoviesListViewModelProtocol {
     func viewDidLoad()
         //TableView
     func getMovieCellViewModel(forCellAtIndex index: Int) -> MovieCellViewModel?
+    func getMovieDetailsViewModel(forMovieAtIndex index: Int,
+                                  completionHander: @escaping (MovieDetailsViewModel?) -> Void)
     func loadMoreMovies()
     func didSelectMovieCell(atIndex index: Int)
         //SearchBar

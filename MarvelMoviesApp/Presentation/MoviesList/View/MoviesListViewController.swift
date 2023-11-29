@@ -17,7 +17,7 @@ class MoviesListViewController: BaseViewController {
     
     private var nextPageLoadingSpinner: UIActivityIndicatorView?
     private lazy var searchController = UISearchController(searchResultsController: nil)
-
+    
     //MARK: ViewLifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +80,7 @@ extension MoviesListViewController {
         bindLoading()
         bindMoviesResponseState()
         bindSearchKey()
-        bindMoviesList()
+        bindSelectedMovieIndex()
     }
     
     private func bindLoading() {
@@ -116,18 +116,20 @@ extension MoviesListViewController {
         })
     }
     
-    private func bindMoviesList() {
-        viewModel.moviesCellsViewModels.bind({ [weak self] _ in
-            guard let self = self else {return}
-            self.tableView.reloadData()
-        })
-    }
-    
     private func bindSearchKey() {
         viewModel.searchKey.bind({ [weak self] searchKey in
             guard let self = self,
                   let searchKey = searchKey else {return}
             self.searchController.searchBar.text = searchKey
+        })
+    }
+    
+    private func bindSelectedMovieIndex() {
+        viewModel.selectedMovieIndex.bind({ [weak self] index in
+            guard let self = self,
+                  let index = index else {return}
+            self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)],
+                                      with: .automatic)
         })
     }
 }
@@ -150,6 +152,10 @@ extension MoviesListViewController: UITableViewDataSource {
         if let cellViewModel = viewModel.getMovieCellViewModel(forCellAtIndex: indexPath.item) {
             cell.viewModel = cellViewModel
         }
+        viewModel.getMovieDetailsViewModel(forMovieAtIndex: indexPath.row,
+                                           completionHander: { movieDetails in
+            cell.detailsViewModel = movieDetails
+        })
         return cell
     }
     
@@ -203,7 +209,7 @@ extension MoviesListViewController: UISearchControllerDelegate {
         viewModel.setSearchingIsEnabled(true)
         scrollToTableViewTop()
     }
-
+    
     func willDismissSearchController(_ searchController: UISearchController) {
         viewModel.setSearchingIsEnabled(false)
         scrollToTableViewTop()

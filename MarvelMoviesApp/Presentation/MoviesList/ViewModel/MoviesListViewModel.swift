@@ -24,11 +24,7 @@ class MoviesListViewModel {
     private let getMovieDetailsByIdUseCase: GetMovieDetailsByID
     
     //MARK: Properites
-    private var moviesList: [Movie] = [] {
-        didSet {
-            moviesCellsViewModels.value = moviesList.map({ MovieCellViewModel(movie: $0) })
-        }
-    }
+    private var moviesList: [Movie] = []
     private var totalMovies = 0
     private var currentPage = 1
     private var hasMoreMovies: Bool {
@@ -39,11 +35,12 @@ class MoviesListViewModel {
     var moviesResponseState: Observable<GetMoviesResponseState> = Observable(nil)
     
         //TableViewDataSource
-    var moviesCellsViewModels: Observable<[MovieCellViewModel]> = Observable(nil)
+    private var moviesCellsViewModels: [MovieCellViewModel] = []
     var numberOfItems: Int {
-        guard let movies = moviesCellsViewModels.value else { return 0 }
-        return movies.count
+        return moviesCellsViewModels.count
     }
+    var selectedMovieIndex: Observable<Int> = Observable(nil)
+    
         //SearchBar
     var searchKey: Observable<String> = Observable(nil)
     private var isSearchingEnabled = false
@@ -66,7 +63,33 @@ extension MoviesListViewModel: MoviesListViewModelProtocol {
     }
         //TableView
     func getMovieCellViewModel(forCellAtIndex index: Int) -> MovieCellViewModel? {
-        return moviesCellsViewModels.value?[index]
+        return moviesCellsViewModels[index]
+    }
+    
+    func getMovieDetailsViewModel(forMovieAtIndex index: Int,
+                                  completionHander: @escaping (MovieDetailsViewModel?) -> Void) {
+        guard let movieId = moviesList[index].id else {
+            completionHander(nil)
+            return
+        }
+        let cellViewModel = moviesCellsViewModels[index]
+        let state = cellViewModel.cellState
+        switch state {
+        case .collapsed: completionHander(nil)
+        case let .expanded(isLoading):
+            getMovieDetailsById(movieId: movieId, completionHander: { [weak self] movieDetails in
+                guard let self = self,
+                      let movieDetails = movieDetails else {
+                    completionHander(nil)
+                    return
+                }
+                completionHander( MovieDetailsViewModel(movieDetails: movieDetails))
+                if isLoading {
+                    self.moviesCellsViewModels[index].updateCellState(newState: .expanded(isLoading: false))
+                }
+            })
+            
+        }
     }
     
     func loadMoreMovies() {
@@ -87,15 +110,14 @@ extension MoviesListViewModel: MoviesListViewModelProtocol {
     }
     
     func didSelectMovieCell(atIndex index: Int) {
-        guard let moviesViewModels = moviesCellsViewModels.value else {return}
-        let currentState = moviesViewModels[index].cellState
+        let currentState = moviesCellsViewModels[index].cellState
         var newState: MovieCellState = .collapsed
         switch currentState {
         case .collapsed: newState = .expanded(isLoading: true)
         case .expanded: newState = .collapsed
         }
-        moviesCellsViewModels.value?[index].updateCellState(newState: newState)
-        getMovieDetailsById(movieId: moviesList[index].id!)
+        moviesCellsViewModels[index].updateCellState(newState: newState)
+        selectedMovieIndex.value = index
     }
         //SearchBar
     func didSearch(searchKey: String) {
@@ -132,6 +154,7 @@ extension MoviesListViewModel {
                 if let movies = response.movies,
                    !movies.isEmpty {
                     self.moviesList.append(contentsOf: movies)
+                    self.moviesCellsViewModels.append(contentsOf: movies.map({ MovieCellViewModel(movie: $0)} ))
                 }
                 self.totalMovies = response.total ?? 0
                 
@@ -158,6 +181,7 @@ extension MoviesListViewModel {
                 if let movies = response.movies,
                    !movies.isEmpty {
                     self.moviesList.append(contentsOf: movies)
+                    self.moviesCellsViewModels.append(contentsOf: movies.map({ MovieCellViewModel(movie: $0)} ))
                 }
                 self.totalMovies = response.total ?? 0
                 
@@ -173,18 +197,18 @@ extension MoviesListViewModel {
         currentPage = 1
         totalMovies = 0
         moviesList = []
+        moviesCellsViewModels = []
     }
     
-    private func getMovieDetailsById(movieId: Int) {
+    private func getMovieDetailsById(movieId: Int,
+                                     completionHander: @escaping (MovieDetails?) -> Void) {
         getMovieDetailsByIdUseCase.execute(movieId: movieId,
-                                           completionHandler: { [weak self] result in
-            guard let self = self else {return}
+                                           completionHandler: { result in
             switch result {
             case let .success(response):
-                print(response.id)
-                
-            case let .failure(error):
-                debugPrint("Failed to get movie details with error \(error.localizedDescription)")
+                completionHander(response)
+            case .failure:
+                completionHander(nil)
             }
         })
     }

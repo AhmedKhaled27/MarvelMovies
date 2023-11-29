@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PT2-yK-4ct">
-                        <rect key="frame" x="20" y="10" width="426" height="454.66666666666669"/>
+                        <rect key="frame" x="20" y="10" width="426" height="604.66666666666663"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Kzk-d1-6PM">
                                 <rect key="frame" x="0.0" y="0.0" width="426" height="404.66666666666669"/>
@@ -55,8 +55,15 @@
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="a6e-I6-9mi" secondAttribute="bottom" constant="15" id="VsX-M1-Gc4"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYs-Cj-CLF">
+                                <rect key="frame" x="0.0" y="404.66666666666669" width="426" height="150.00000000000006"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="p2I-zt-4MR"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RsU-J3-M6C">
-                                <rect key="frame" x="0.0" y="404.66666666666669" width="426" height="50"/>
+                                <rect key="frame" x="0.0" y="554.66666666666663" width="426" height="50"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="D9W-HZ-qS7">
                                         <rect key="frame" x="194.66666666666666" y="0.0" width="37" height="30"/>
@@ -88,6 +95,7 @@
             <connections>
                 <outlet property="containerView" destination="PT2-yK-4ct" id="VkN-hB-Zq7"/>
                 <outlet property="loadingContainerView" destination="RsU-J3-M6C" id="NR1-vx-Mc3"/>
+                <outlet property="movieDetailsContainerView" destination="vYs-Cj-CLF" id="cN2-W5-f51"/>
                 <outlet property="nameLabel" destination="zGk-kC-uMj" id="P8K-s7-ngk"/>
                 <outlet property="ratingLabel" destination="QBR-qw-0l6" id="dwd-5A-k5f"/>
                 <outlet property="thumbnailImageView" destination="a6e-I6-9mi" id="YWP-mN-mMa"/>

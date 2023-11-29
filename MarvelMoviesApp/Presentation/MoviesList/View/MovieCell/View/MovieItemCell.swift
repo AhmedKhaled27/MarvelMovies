@@ -29,10 +29,16 @@ class MovieItemCell: UITableViewCell {
     @IBOutlet private var ratingLabel: UILabel!
         //Loading
     @IBOutlet weak var loadingContainerView: UIView!
+    @IBOutlet weak var movieDetailsContainerView: UIView!
     
     //MARK: Properites
     var viewModel: MovieCellViewModel? {
         didSet { setupViewModel() }
+    }
+    var detailsViewModel: MovieDetailsViewModel? {
+        didSet {
+            setupMovieDetailsViewModel()
+        }
     }
     
     //MARK: Properites
@@ -95,10 +101,20 @@ class MovieItemCell: UITableViewCell {
         case .collapsed:
             print("movie cell collapsed")
             loadingContainerView.isHidden = true
+            movieDetailsContainerView.isHidden = true
         case let .expanded(isLoading):
             print("movie cell expanded and isLoading -> \(isLoading)")
             loadingContainerView.isHidden = !isLoading
+            movieDetailsContainerView.isHidden = isLoading
         }
         layoutIfNeeded()
+    }
+}
+
+extension MovieItemCell {
+    private func setupMovieDetailsViewModel() {
+        guard let viewModel = viewModel,
+        let detailsViewModel = detailsViewModel else { return }
+        
     }
 }
