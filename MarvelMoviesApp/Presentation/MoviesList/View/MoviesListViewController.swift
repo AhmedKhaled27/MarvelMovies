@@ -40,6 +40,7 @@ class MoviesListViewController: BaseViewController {
 extension MoviesListViewController {
     private func setupUI() {
         setupNavigationBar()
+        hideSearchKeyboardWhenTappedAround()
     }
     
     private func setupNavigationBar() {
@@ -47,6 +48,16 @@ extension MoviesListViewController {
         setupNavigationItemSearchBar()
         setupTableView()
         setupViewModel()
+    }
+    
+    private func hideSearchKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func dismissKeyboard() {
+        searchController.searchBar.endEditing(true)
     }
     
     private func setupNavigationItemSearchBar() {
