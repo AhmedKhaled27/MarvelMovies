@@ -36,8 +36,10 @@ extension SplashViewController {
     private func navigateToMovies() {
         //Services
         let moviesRemoteDataService = MoviesRemoteDataService()
+        let moviesLocalDataService = MoviesLocalDataService()
         //Repositories
-        let movieReposotiry = MovieDataRespository(moviesRemoteDataService: moviesRemoteDataService)
+        let movieReposotiry = MovieDataRespository(moviesRemoteDataService: moviesRemoteDataService,
+                                                   moviesLocalDataService: moviesLocalDataService)
         //UseCases
         let getMoviesListUseCase = GetMoviesListUseCase(movieRepository: movieReposotiry)
         let searchMoviesUseCase = SearchMoviesUseCase(movieRepository: movieReposotiry)

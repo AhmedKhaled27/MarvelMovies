@@ -60,6 +60,11 @@
 		B0C3458D2B1749B600485E8C /* CreatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C3458B2B1749B600485E8C /* CreatorCell.swift */; };
 		B0C3458E2B1749B600485E8C /* CreatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C3458C2B1749B600485E8C /* CreatorCell.xib */; };
 		B0C345902B1749FD00485E8C /* UICollectionView+Exetension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C3458F2B1749FD00485E8C /* UICollectionView+Exetension.swift */; };
+		B0C345922B17560400485E8C /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C345912B17560400485E8C /* CoreDataStorage.swift */; };
+		B0C345972B17569800485E8C /* MoviesLocalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C345962B17569800485E8C /* MoviesLocalDataService.swift */; };
+		B0C3459A2B175A4400485E8C /* MoviesLocalDataServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C345992B175A4400485E8C /* MoviesLocalDataServiceProtocol.swift */; };
+		B0C3459E2B176A8100485E8C /* MovieDetailsEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C3459D2B176A8100485E8C /* MovieDetailsEntity+Mapping.swift */; };
+		B0C345A02B176ADA00485E8C /* CreatorEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C3459F2B176ADA00485E8C /* CreatorEntity+Mapping.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +120,11 @@
 		B0C3458B2B1749B600485E8C /* CreatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorCell.swift; sourceTree = "<group>"; };
 		B0C3458C2B1749B600485E8C /* CreatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatorCell.xib; sourceTree = "<group>"; };
 		B0C3458F2B1749FD00485E8C /* UICollectionView+Exetension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Exetension.swift"; sourceTree = "<group>"; };
+		B0C345912B17560400485E8C /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		B0C345962B17569800485E8C /* MoviesLocalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLocalDataService.swift; sourceTree = "<group>"; };
+		B0C345992B175A4400485E8C /* MoviesLocalDataServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLocalDataServiceProtocol.swift; sourceTree = "<group>"; };
+		B0C3459D2B176A8100485E8C /* MovieDetailsEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieDetailsEntity+Mapping.swift"; sourceTree = "<group>"; };
+		B0C3459F2B176ADA00485E8C /* CreatorEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreatorEntity+Mapping.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +187,7 @@
 			children = (
 				B0C345252B15651100485E8C /* Entites */,
 				B0C3453C2B157C0B00485E8C /* Repositories */,
+				B0C345932B17564100485E8C /* DataServices */,
 				B0C345132B155A6A00485E8C /* NetworkManager */,
 				B0C344DE2B150F5600485E8C /* PersistentStorages */,
 			);
@@ -186,6 +197,8 @@
 		B0C344DD2B150ED800485E8C /* CoreDataStorage */ = {
 			isa = PBXGroup;
 			children = (
+				B0C345912B17560400485E8C /* CoreDataStorage.swift */,
+				B0C3459B2B176A4700485E8C /* EntityMaping */,
 				B0C344CA2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld */,
 			);
 			path = CoreDataStorage;
@@ -241,17 +254,16 @@
 			children = (
 				B0C345152B155B7800485E8C /* APIService.swift */,
 				B0C3451B2B155CB500485E8C /* MarvelAPI.swift */,
-				B0C345172B155BE000485E8C /* RemoteServices */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
 		};
-		B0C345172B155BE000485E8C /* RemoteServices */ = {
+		B0C345172B155BE000485E8C /* RemoteDataServices */ = {
 			isa = PBXGroup;
 			children = (
 				B0C345182B155BF800485E8C /* Movies */,
 			);
-			path = RemoteServices;
+			path = RemoteDataServices;
 			sourceTree = "<group>";
 		};
 		B0C345182B155BF800485E8C /* Movies */ = {
@@ -493,6 +505,41 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		B0C345932B17564100485E8C /* DataServices */ = {
+			isa = PBXGroup;
+			children = (
+				B0C345942B17566A00485E8C /* LocalDataServices */,
+				B0C345172B155BE000485E8C /* RemoteDataServices */,
+			);
+			path = DataServices;
+			sourceTree = "<group>";
+		};
+		B0C345942B17566A00485E8C /* LocalDataServices */ = {
+			isa = PBXGroup;
+			children = (
+				B0C345952B17567600485E8C /* Movies */,
+			);
+			path = LocalDataServices;
+			sourceTree = "<group>";
+		};
+		B0C345952B17567600485E8C /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+				B0C345992B175A4400485E8C /* MoviesLocalDataServiceProtocol.swift */,
+				B0C345962B17569800485E8C /* MoviesLocalDataService.swift */,
+			);
+			path = Movies;
+			sourceTree = "<group>";
+		};
+		B0C3459B2B176A4700485E8C /* EntityMaping */ = {
+			isa = PBXGroup;
+			children = (
+				B0C3459D2B176A8100485E8C /* MovieDetailsEntity+Mapping.swift */,
+				B0C3459F2B176ADA00485E8C /* CreatorEntity+Mapping.swift */,
+			);
+			path = EntityMaping;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -594,7 +641,9 @@
 				B0C3458D2B1749B600485E8C /* CreatorCell.swift in Sources */,
 				B0C345792B16B68500485E8C /* MovieDetails.swift in Sources */,
 				B0C3452C2B156ED900485E8C /* BaseResponse.swift in Sources */,
+				B0C345A02B176ADA00485E8C /* CreatorEntity+Mapping.swift in Sources */,
 				B0C3453B2B157BCB00485E8C /* MovieRepository.swift in Sources */,
+				B0C345972B17569800485E8C /* MoviesLocalDataService.swift in Sources */,
 				B0C345552B15F38600485E8C /* NSObject+Exetension.swift in Sources */,
 				B0C3453E2B157C2400485E8C /* MovieDataRespository.swift in Sources */,
 				B0C345902B1749FD00485E8C /* UICollectionView+Exetension.swift in Sources */,
@@ -611,11 +660,14 @@
 				B0C3451A2B155C1100485E8C /* MoviesEndPoint.swift in Sources */,
 				B0C344C22B14DA4700485E8C /* AppDelegate.swift in Sources */,
 				B0C345622B15FF2E00485E8C /* MovieCellViewModel.swift in Sources */,
+				B0C345922B17560400485E8C /* CoreDataStorage.swift in Sources */,
 				B0C3451C2B155CB500485E8C /* MarvelAPI.swift in Sources */,
 				B0C3456C2B161F8E00485E8C /* SearchMoviesUseCase.swift in Sources */,
 				B0C345242B1564B600485E8C /* MoviesRemoteDataServiceProtocol.swift in Sources */,
 				B0C345852B1743EE00485E8C /* Creator.swift in Sources */,
+				B0C3459E2B176A8100485E8C /* MovieDetailsEntity+Mapping.swift in Sources */,
 				B0C3454E2B15949800485E8C /* MovieItemCell.swift in Sources */,
+				B0C3459A2B175A4400485E8C /* MoviesLocalDataServiceProtocol.swift in Sources */,
 				B0C344CC2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld in Sources */,
 				B0C345442B15826700485E8C /* MoviesListViewModel.swift in Sources */,
 				B0C345362B15790900485E8C /* MovieImage.swift in Sources */,
@@ -775,9 +827,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ahmed.MarvelMoviesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -802,9 +857,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ahmed.MarvelMoviesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

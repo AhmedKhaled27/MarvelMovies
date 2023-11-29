@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct CreatorData: Codable {
     var name: String?
@@ -15,5 +16,14 @@ struct CreatorData: Codable {
 extension CreatorData {
     func toDomain() -> Creator {
         Creator(name: name, role: role)
+    }
+}
+
+extension CreatorData {
+    func toEntity(in context: NSManagedObjectContext) -> CreatorEntity  {
+        let entity: CreatorEntity = .init(context: context)
+        entity.name = name
+        entity.role = role
+        return entity
     }
 }

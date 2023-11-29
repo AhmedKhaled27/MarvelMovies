@@ -10,10 +10,13 @@ import Foundation
 class MovieDataRespository {
     //MARK: Properites
     let moviesRemoteDataService: MoviesRemoteDataServiceProtocol
+    let moviesLocalDataService: MoviesLocalDataServiceProtocol
     
     //MARK: Initialization
-    init(moviesRemoteDataService: MoviesRemoteDataServiceProtocol) {
+    init(moviesRemoteDataService: MoviesRemoteDataServiceProtocol,
+         moviesLocalDataService: MoviesLocalDataServiceProtocol) {
         self.moviesRemoteDataService = moviesRemoteDataService
+        self.moviesLocalDataService = moviesLocalDataService
     }
 }
 
@@ -52,19 +55,36 @@ extension MovieDataRespository: MovieRepository {
        })
     }
     
-    func getMovieDetailsBtID(movieId: Int, completionHandler: @escaping ((Result<MovieDetails, Error>) -> Void)) {
-        moviesRemoteDataService.getMovieDetails(maovieId: movieId) { result in
+    func getMovieDetailsBtID(movieId: Int,
+                             completionHandler: @escaping ((Result<MovieDetails, Error>) -> Void)) {
+        
+        moviesLocalDataService.fetchMovieById(movieId,
+                                              completionHandler: { [weak self] result in
+            guard let self = self else {return}
             switch result {
-            case let .success(responce):
-                guard let data = responce.data else {
-                    completionHandler(.failure("Cann't get movies data matching query"))
-                    return
+            case let .success(response):
+                DispatchQueue.main.async {
+                    completionHandler(.success(response))
                 }
-                completionHandler(.success(data.toDomain()))
-                
-            case let .failure(error):
-                completionHandler(.failure(error))
+            case .failure:
+                self.moviesRemoteDataService.getMovieDetails(maovieId: movieId) { result in
+                    switch result {
+                    case let .success(responce):
+                        guard let data = responce.data else {
+                            completionHandler(.failure("Cann't get movies data matching query"))
+                            return
+                        }
+                        completionHandler(.success(data.toDomain()))
+                        
+                        //cache response
+                        if let movieDetailsData = data.movies?.first {
+                            self.moviesLocalDataService.saveMovieDetails(movieDetails: movieDetailsData)
+                        }
+                    case let .failure(error):
+                        completionHandler(.failure(error))
+                    }
+                }
             }
-        }
+        })
     }
 }
