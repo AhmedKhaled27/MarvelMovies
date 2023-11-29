@@ -27,13 +27,16 @@ class MovieItemCell: UITableViewCell {
     @IBOutlet private var nameLabel: UILabel!
     //    @IBOutlet private var dateLabel: UILabel!
     @IBOutlet private var ratingLabel: UILabel!
-    //Loading
+        //Loading
     @IBOutlet weak var loadingContainerView: UIView!
     @IBOutlet weak var movieDetailsContainerView: UIView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     //Description
-    
     @IBOutlet weak var descriptionStackView: UIStackView!
     @IBOutlet weak var descriptionLabel: UILabel!
+        //Creators
+    @IBOutlet weak var creatorsCollectionView: UICollectionView!
+    @IBOutlet weak var noCreatorsLabel: UILabel!
     
     //MARK: Properites
     var viewModel: MovieCellViewModel? {
@@ -43,7 +46,7 @@ class MovieItemCell: UITableViewCell {
     //MARK: Properites
     override func awakeFromNib() {
         super.awakeFromNib()
-        selectionStyle = .none
+        setupUI()
         setupViewModel()
     }
     
@@ -53,6 +56,45 @@ class MovieItemCell: UITableViewCell {
     }
     
     //MARK: Helper Functions
+    private func setupUI() {
+        selectionStyle = .none
+        setupCreatorsCollectionView()
+        setupTitels()
+    }
+    
+    private func setupTitels() {
+        noCreatorsLabel.text = "Movie doesn't have creators"
+    }
+    
+    private func setupCreatorsCollectionView() {
+        creatorsCollectionView.delegate = self
+        creatorsCollectionView.dataSource = self
+        creatorsCollectionView.register(cellWithClass: CreatorCell.self)
+        creatorsCollectionView.collectionViewLayout = createCreatorsCollectionViewLayout()
+    }
+    
+    func createCreatorsCollectionViewLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100),
+                                              heightDimension: .absolute(60))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(100),
+                                               heightDimension: .absolute(60))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
+                                                     subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.interGroupSpacing = 5
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+
+}
+
+//MARK: Setup viewModel
+extension MovieItemCell {
     private func setupViewModel() {
         guard let viewModel = viewModel else { return }
         setupNameLabelWithName(viewModel.movieName)
@@ -100,17 +142,21 @@ class MovieItemCell: UITableViewCell {
         switch state {
         case .collapsed:
             loadingContainerView.isHidden = true
+            loadingIndicator.startAnimating()
             movieDetailsContainerView.isHidden = true
             
         case let .expanded(isLoading):
             loadingContainerView.isHidden = !isLoading
             movieDetailsContainerView.isHidden = isLoading
+            if isLoading { loadingIndicator.startAnimating() }
+            else { loadingIndicator.stopAnimating() }
             
         }
         layoutIfNeeded()
     }
 }
 
+//MARK: Setup DetailsViewModel
 extension MovieItemCell {
     private func setupMovieDetailsViewModel(detailsViewModel: MovieDetailsViewModel?) {
         
@@ -118,8 +164,16 @@ extension MovieItemCell {
             movieDetailsContainerView.isHidden = true
             return
         }
-        
         setupMovieDescription(detailsViewModel.description)
+        
+        if detailsViewModel.numberOfCreators == 0 {
+            creatorsCollectionView.isHidden = true
+            noCreatorsLabel.isHidden = false
+        }else {
+            creatorsCollectionView.isHidden = false
+            noCreatorsLabel.isHidden = true
+            creatorsCollectionView.reloadData()
+        }
     }
     
     private func setupMovieDescription(_ description: String?) {
@@ -129,6 +183,38 @@ extension MovieItemCell {
             descriptionLabel.text = description
         }else {
             descriptionLabel.text = "Movie doesn't have a description."
+        }
+    }
+}
+
+//MARK: UICollectionViewDelegate
+extension MovieItemCell: UICollectionViewDelegate {
+    
+}
+
+//MARK: UICollectionViewDataSource
+extension MovieItemCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == creatorsCollectionView {
+            guard let detailsViewModel = viewModel?.detailsViewModel else { return 0 }
+            return detailsViewModel.numberOfCreators
+        }else {
+            return 0
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == creatorsCollectionView {
+            guard let detailsViewModel = viewModel?.detailsViewModel else {
+                return UICollectionViewCell()
+            }
+            
+            let cell = collectionView.dequeueReusableCell(withClass: CreatorCell.self, for: indexPath)
+            cell.viewModel = detailsViewModel.getCreatorItemCellViewModel(atIndex: indexPath.item)
+            return cell
+            
+        }else {
+            return UICollectionViewCell()
         }
     }
 }
