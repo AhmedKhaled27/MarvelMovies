@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B0C344C22B14DA4700485E8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C344C12B14DA4700485E8C /* AppDelegate.swift */; };
-		B0C344CC2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0C344CA2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld */; };
+		B0C344CC2B14DA4700485E8C /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0C344CA2B14DA4700485E8C /* CoreDataStorage.xcdatamodeld */; };
 		B0C344CE2B14DA4900485E8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0C344CD2B14DA4900485E8C /* Assets.xcassets */; };
 		B0C344D12B14DA4900485E8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0C344CF2B14DA4900485E8C /* LaunchScreen.storyboard */; };
 		B0C344E32B15138D00485E8C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C344E12B15138D00485E8C /* SplashViewController.swift */; };
@@ -199,7 +199,7 @@
 			children = (
 				B0C345912B17560400485E8C /* CoreDataStorage.swift */,
 				B0C3459B2B176A4700485E8C /* EntityMaping */,
-				B0C344CA2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld */,
+				B0C344CA2B14DA4700485E8C /* CoreDataStorage.xcdatamodeld */,
 			);
 			path = CoreDataStorage;
 			sourceTree = "<group>";
@@ -668,7 +668,7 @@
 				B0C3459E2B176A8100485E8C /* MovieDetailsEntity+Mapping.swift in Sources */,
 				B0C3454E2B15949800485E8C /* MovieItemCell.swift in Sources */,
 				B0C3459A2B175A4400485E8C /* MoviesLocalDataServiceProtocol.swift in Sources */,
-				B0C344CC2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld in Sources */,
+				B0C344CC2B14DA4700485E8C /* CoreDataStorage.xcdatamodeld in Sources */,
 				B0C345442B15826700485E8C /* MoviesListViewModel.swift in Sources */,
 				B0C345362B15790900485E8C /* MovieImage.swift in Sources */,
 				B0C345342B15787000485E8C /* Movie.swift in Sources */,
@@ -935,13 +935,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		B0C344CA2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodeld */ = {
+		B0C344CA2B14DA4700485E8C /* CoreDataStorage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				B0C344CB2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodel */,
 			);
 			currentVersion = B0C344CB2B14DA4700485E8C /* MarvelMoviesApp.xcdatamodel */;
-			path = MarvelMoviesApp.xcdatamodeld;
+			path = CoreDataStorage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

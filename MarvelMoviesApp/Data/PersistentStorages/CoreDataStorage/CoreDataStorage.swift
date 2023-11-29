@@ -21,10 +21,10 @@ final class CoreDataStorage {
     
     // MARK: Core Data stack
     private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "MarvelMoviesApp")
+        let container = NSPersistentContainer(name: "CoreDataStorage")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
-                assertionFailure("MarvelMoviesApp Unresolved error \(error), \(error.userInfo)")
+                assertionFailure("CoreDataStorage Unresolved error \(error), \(error.userInfo)")
             }
         }
         return container
@@ -37,7 +37,7 @@ final class CoreDataStorage {
             do {
                 try context.save()
             } catch {
-                assertionFailure("MarvelMoviesApp Unresolved error \(error), \((error as NSError).userInfo)")
+                assertionFailure("CoreDataStorage Unresolved error \(error), \((error as NSError).userInfo)")
             }
         }
     }
