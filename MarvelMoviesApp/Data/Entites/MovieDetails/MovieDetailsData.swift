@@ -17,7 +17,7 @@ struct MovieDetailsData: Codable {
 extension MovieDetailsData {
     func toDomain() -> MovieDetails {
         return MovieDetails(id: id,
-                            descroption: description,
+                            description: description,
                             creators: creators?.toDomain())
     }
 }

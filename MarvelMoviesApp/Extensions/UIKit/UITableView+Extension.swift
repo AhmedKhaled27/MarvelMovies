@@ -1,5 +1,5 @@
 //
-//  UITableView+Exetension.swift
+//  UITableView+Extension.swift
 //  MarvelMoviesApp
 //
 //  Created by Ahmed Khaled on 28/11/2023.

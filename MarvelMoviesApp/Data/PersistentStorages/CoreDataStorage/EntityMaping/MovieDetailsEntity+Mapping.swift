@@ -10,7 +10,7 @@ import Foundation
 extension MovieDetailsEntity {
     func toDomain() -> MovieDetails {
         MovieDetails(id: Int(id),
-                     descroption: movieDescription,
+                     description: movieDescription,
                      creators: creators?.allObjects.map({ ($0 as! CreatorEntity).toDomain() }))
     }
 }

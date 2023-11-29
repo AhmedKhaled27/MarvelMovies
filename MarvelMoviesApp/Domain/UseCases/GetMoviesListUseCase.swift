@@ -13,7 +13,7 @@ protocol GetMoviesList {
 }
 
 class GetMoviesListUseCase {
-    //MARK: Properites
+    //MARK: Properties
     private var movieRepository: MovieRepository
     
     //MARK: Initializer

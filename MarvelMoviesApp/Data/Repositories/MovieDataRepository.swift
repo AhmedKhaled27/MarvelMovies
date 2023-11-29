@@ -1,5 +1,5 @@
 //
-//  MovieDataRespository.swift
+//  MovieDataRepository.swift
 //  MarvelMoviesApp
 //
 //  Created by Ahmed Khaled on 28/11/2023.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-class MovieDataRespository {
-    //MARK: Properites
+class MovieDataRepository {
+    //MARK: Properties
     let moviesRemoteDataService: MoviesRemoteDataServiceProtocol
     let moviesLocalDataService: MoviesLocalDataServiceProtocol
     
@@ -21,13 +21,13 @@ class MovieDataRespository {
 }
 
 //MARK: Conform to MovieRepository
-extension MovieDataRespository: MovieRepository {
+extension MovieDataRepository: MovieRepository {
     func getMoviesList(page: Int, completionHandler: @escaping ((Result<Movies, Error>) -> Void)) {
         moviesRemoteDataService.getMoviesList(page: page,
                                               completionHandler: { result in
             switch result {
-            case let .success(responce):
-                guard let data = responce.data else {
+            case let .success(response):
+                guard let data = response.data else {
                     completionHandler(.failure("Cann't get movies data"))
                     return
                 }
@@ -67,10 +67,10 @@ extension MovieDataRespository: MovieRepository {
                     completionHandler(.success(response))
                 }
             case .failure:
-                self.moviesRemoteDataService.getMovieDetails(maovieId: movieId) { result in
+                self.moviesRemoteDataService.getMovieDetails(movieId: movieId) { result in
                     switch result {
-                    case let .success(responce):
-                        guard let data = responce.data else {
+                    case let .success(response):
+                        guard let data = response.data else {
                             completionHandler(.failure("Cann't get movies data matching query"))
                             return
                         }

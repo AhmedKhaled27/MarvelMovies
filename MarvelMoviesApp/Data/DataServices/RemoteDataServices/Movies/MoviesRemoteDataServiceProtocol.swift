@@ -13,6 +13,6 @@ protocol MoviesRemoteDataServiceProtocol {
     func searchMovies(page: Int,
                       searchKey: String,
                       completionHandler: @escaping ((Result<BaseResponse<MoviesDataResponse>, Error>) -> Void))
-    func getMovieDetails(maovieId: Int,
+    func getMovieDetails(movieId: Int,
                          completionHandler: @escaping ((Result<BaseResponse<MovieDetailsResponse>, Error>) -> Void))
 }

@@ -1,5 +1,5 @@
 //
-//  UICollectionView+Exetension.swift
+//  UICollectionView+Extension.swift
 //  MarvelMoviesApp
 //
 //  Created by Ahmed Khaled on 29/11/2023.

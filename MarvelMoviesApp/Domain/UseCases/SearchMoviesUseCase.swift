@@ -14,7 +14,7 @@ protocol SearchMovies {
 }
 
 class SearchMoviesUseCase {
-    //MARK: Properites
+    //MARK: Properties
     private var movieRepository: MovieRepository
     
     //MARK: Initializer

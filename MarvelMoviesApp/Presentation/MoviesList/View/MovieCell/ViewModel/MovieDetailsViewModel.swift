@@ -16,7 +16,7 @@ struct MovieDetailsViewModel {
     }
     
     init(movieDetails: MovieDetails) {
-        self.description = movieDetails.descroption
+        self.description = movieDetails.description
         self.creators = movieDetails.creators ?? []
     }
 }

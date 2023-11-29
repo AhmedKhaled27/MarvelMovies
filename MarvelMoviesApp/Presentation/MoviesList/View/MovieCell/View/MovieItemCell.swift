@@ -38,12 +38,12 @@ class MovieItemCell: UITableViewCell {
     @IBOutlet weak var creatorsCollectionView: UICollectionView!
     @IBOutlet weak var noCreatorsLabel: UILabel!
     
-    //MARK: Properites
+    //MARK: Properties
     var viewModel: MovieCellViewModel? {
         didSet { setupViewModel() }
     }
     
-    //MARK: Properites
+    //MARK: Properties
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()

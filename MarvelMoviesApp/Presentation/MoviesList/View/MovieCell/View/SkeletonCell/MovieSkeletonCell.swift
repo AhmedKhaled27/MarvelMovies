@@ -16,11 +16,11 @@ class MovieSkeletonCell: UITableViewCell {
             containerView.layer.borderColor = AppColors.color_D83933.color.cgColor
         }
     }
-    @IBOutlet weak var moviewImageView: UIImageView! {
+    @IBOutlet weak var movieImageView: UIImageView! {
         didSet {
-            moviewImageView.layer.cornerRadius = moviewImageView.frame.height/6
-            moviewImageView.layer.borderWidth = 1
-            moviewImageView.layer.borderColor = AppColors.color_D83933.color.cgColor
+            movieImageView.layer.cornerRadius = movieImageView.frame.height/6
+            movieImageView.layer.borderWidth = 1
+            movieImageView.layer.borderColor = AppColors.color_D83933.color.cgColor
         }
     }
     

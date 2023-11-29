@@ -9,6 +9,6 @@ import Foundation
 
 struct MovieDetails {
     var id: Int?
-    var descroption: String?
+    var description: String?
     var creators: [Creator]?
 }

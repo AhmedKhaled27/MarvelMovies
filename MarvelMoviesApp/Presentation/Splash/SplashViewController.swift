@@ -38,12 +38,12 @@ extension SplashViewController {
         let moviesRemoteDataService = MoviesRemoteDataService()
         let moviesLocalDataService = MoviesLocalDataService()
         //Repositories
-        let movieReposotiry = MovieDataRespository(moviesRemoteDataService: moviesRemoteDataService,
+        let movieRepository = MovieDataRepository(moviesRemoteDataService: moviesRemoteDataService,
                                                    moviesLocalDataService: moviesLocalDataService)
         //UseCases
-        let getMoviesListUseCase = GetMoviesListUseCase(movieRepository: movieReposotiry)
-        let searchMoviesUseCase = SearchMoviesUseCase(movieRepository: movieReposotiry)
-        let getMovieDetailsByIDUseCase = GetMovieDetailsByIDUseCase(movieRepository: movieReposotiry)
+        let getMoviesListUseCase = GetMoviesListUseCase(movieRepository: movieRepository)
+        let searchMoviesUseCase = SearchMoviesUseCase(movieRepository: movieRepository)
+        let getMovieDetailsByIDUseCase = GetMovieDetailsByIDUseCase(movieRepository: movieRepository)
         //ViewModel
         let viewModel = MoviesListViewModel(getMoviesListUseCase: getMoviesListUseCase,
                                             searchMoviesUseCase: searchMoviesUseCase,

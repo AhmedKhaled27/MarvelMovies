@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MoviesListViewModelProtocol {
-    //Properites
+    //Properties
     var loading: Observable<MoviesListViewModelLoading> {get set}
     var moviesResponseState: Observable<GetMoviesResponseState> {get set}
         //TableViewDataSource
