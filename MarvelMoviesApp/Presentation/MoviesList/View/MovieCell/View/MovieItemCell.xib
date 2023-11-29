@@ -30,7 +30,7 @@
                                             <constraint firstAttribute="width" secondItem="a6e-I6-9mi" secondAttribute="height" multiplier="1:1" id="I8b-aJ-3q6"/>
                                         </constraints>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="CBr-TG-NVO">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="CBr-TG-NVO">
                                         <rect key="frame" x="163.66666666666666" y="755.33333333333337" width="336.33333333333337" height="45.666666666666629"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGk-kC-uMj">
