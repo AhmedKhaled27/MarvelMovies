@@ -19,11 +19,11 @@ enum GetMoviesResponseState {
 
 class MoviesListViewModel {
     //MARK: UseCases
-    private let getMoviesListUseCase: GetMoviesList
-    private let searchMoviesUseCase: SearchMovies
-    private let getMovieDetailsByIdUseCase: GetMovieDetailsByID
+    private lazy var getMoviesListUseCase: GetMoviesList = GetMoviesListUseCase()
+    private lazy var searchMoviesUseCase: SearchMovies = SearchMoviesUseCase()
+    private lazy var getMovieDetailsByIdUseCase: GetMovieDetailsByID = GetMovieDetailsByIDUseCase()
     
-    //MARK: Properites
+    //MARK: Properties
     private var moviesList: [Movie] = []
     private var totalMovies = 0
     private var currentPage = 1
@@ -45,14 +45,6 @@ class MoviesListViewModel {
     var searchKey: Observable<String> = Observable(nil)
     private var isSearchingEnabled = false
     
-    //MARK: Initialzer
-    init(getMoviesListUseCase: GetMoviesList,
-         searchMoviesUseCase: SearchMovies,
-         getMovieDetailsByIdUseCase: GetMovieDetailsByID) {
-        self.getMoviesListUseCase = getMoviesListUseCase
-        self.searchMoviesUseCase = searchMoviesUseCase
-        self.getMovieDetailsByIdUseCase = getMovieDetailsByIdUseCase
-    }
 }
 
 //MARK: Conform to MoviesListViewModel

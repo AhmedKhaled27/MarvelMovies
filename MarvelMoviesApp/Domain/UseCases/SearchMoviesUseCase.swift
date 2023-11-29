@@ -15,12 +15,7 @@ protocol SearchMovies {
 
 class SearchMoviesUseCase {
     //MARK: Properties
-    private var movieRepository: MovieRepository
-    
-    //MARK: Initializer
-    init(movieRepository: MovieRepository) {
-        self.movieRepository = movieRepository
-    }
+    private lazy var movieRepository: MovieRepository = MovieDataRepository()
 }
 
 //MARK: conform to GetMoviesList

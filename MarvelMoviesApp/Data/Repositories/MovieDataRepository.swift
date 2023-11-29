@@ -9,15 +9,8 @@ import Foundation
 
 class MovieDataRepository {
     //MARK: Properties
-    let moviesRemoteDataService: MoviesRemoteDataServiceProtocol
-    let moviesLocalDataService: MoviesLocalDataServiceProtocol
-    
-    //MARK: Initialization
-    init(moviesRemoteDataService: MoviesRemoteDataServiceProtocol,
-         moviesLocalDataService: MoviesLocalDataServiceProtocol) {
-        self.moviesRemoteDataService = moviesRemoteDataService
-        self.moviesLocalDataService = moviesLocalDataService
-    }
+    private lazy var moviesRemoteDataService: MoviesRemoteDataServiceProtocol = MoviesRemoteDataService()
+    private lazy var moviesLocalDataService: MoviesLocalDataServiceProtocol = MoviesLocalDataService()
 }
 
 //MARK: Conform to MovieRepository
