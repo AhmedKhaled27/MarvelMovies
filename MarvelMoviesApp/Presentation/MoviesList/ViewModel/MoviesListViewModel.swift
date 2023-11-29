@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Moya
 
 enum MoviesListViewModelLoading {
     case fullScreen
@@ -30,18 +31,19 @@ class MoviesListViewModel {
     private var hasMoreMovies: Bool {
         moviesList.count < totalMovies
     }
+    private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
     
     var loading: Observable<MoviesListViewModelLoading> = Observable(.none)
     var moviesResponseState: Observable<GetMoviesResponseState> = Observable(nil)
     
-        //TableViewDataSource
+    //TableViewDataSource
     private var moviesCellsViewModels: [MovieCellViewModel] = []
     var numberOfItems: Int {
         return moviesCellsViewModels.count
     }
     var selectedMovieIndex: Observable<Int> = Observable(nil)
     
-        //SearchBar
+    //SearchBar
     var searchKey: Observable<String> = Observable(nil)
     private var isSearchingEnabled = false
     
@@ -53,35 +55,9 @@ extension MoviesListViewModel: MoviesListViewModelProtocol {
         getMoviesList(page: currentPage,
                       loadingType: .fullScreen)
     }
-        //TableView
+    //TableView
     func getMovieCellViewModel(forCellAtIndex index: Int) -> MovieCellViewModel? {
         return moviesCellsViewModels[index]
-    }
-    
-    func getMovieDetailsViewModel(forMovieAtIndex index: Int,
-                                  completionHander: @escaping (MovieDetailsViewModel?) -> Void) {
-        guard let movieId = moviesList[index].id else {
-            completionHander(nil)
-            return
-        }
-        let cellViewModel = moviesCellsViewModels[index]
-        let state = cellViewModel.cellState
-        switch state {
-        case .collapsed: completionHander(nil)
-        case let .expanded(isLoading):
-            getMovieDetailsById(movieId: movieId, completionHander: { [weak self] movieDetails in
-                guard let self = self,
-                      let movieDetails = movieDetails else {
-                    completionHander(nil)
-                    return
-                }
-                completionHander( MovieDetailsViewModel(movieDetails: movieDetails))
-                if isLoading {
-                    self.moviesCellsViewModels[index].updateCellState(newState: .expanded(isLoading: false))
-                }
-            })
-            
-        }
     }
     
     func loadMoreMovies() {
@@ -122,20 +98,26 @@ extension MoviesListViewModel: MoviesListViewModelProtocol {
                 self.moviesCellsViewModels[index].updateCellState(newState: .expanded(isLoading: false))
                 self.selectedMovieIndex.value = index
             })
-
+            
         case .expanded:
             moviesCellsViewModels[index]
                 .updateCellState(newState: .collapsed)
         }
         selectedMovieIndex.value = index
     }
-        //SearchBar
+    //SearchBar
     func didSearch(searchKey: String) {
+        guard searchKey != self.searchKey.value else {return}
         resetPagesData()
         self.searchKey.value = searchKey
-        searchMovies(page: currentPage,
-                     searchKey: searchKey,
-                     loadingType: .fullScreen)
+        if !searchKey.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            searchMovies(page: currentPage,
+                         searchKey: searchKey,
+                         loadingType: .fullScreen)
+        }else {
+            getMoviesList(page: currentPage,
+                          loadingType: .fullScreen)
+        }
     }
     
     func setSearchingIsEnabled(_ isEnabled: Bool) {
@@ -155,7 +137,7 @@ extension MoviesListViewModel {
     private func getMoviesList(page: Int,
                                loadingType: MoviesListViewModelLoading) {
         loading.value = loadingType
-        getMoviesListUseCase.execute(page: currentPage) { [weak self] result in
+        moviesLoadTask = getMoviesListUseCase.execute(page: currentPage) { [weak self] result in
             guard let self = self else {return}
             self.loading.value = .none
             switch result {
@@ -180,9 +162,9 @@ extension MoviesListViewModel {
                               searchKey: String,
                               loadingType: MoviesListViewModelLoading) {
         loading.value = loadingType
-        searchMoviesUseCase.execute(page: page,
-                                    searchKey: searchKey,
-                                    completionHandler: { [weak self] result in
+        moviesLoadTask = searchMoviesUseCase.execute(page: page,
+                                                     searchKey: searchKey,
+                                                     completionHandler: { [weak self] result in
             guard let self = self else {return}
             self.loading.value = .none
             switch result {
@@ -195,7 +177,7 @@ extension MoviesListViewModel {
                 }
                 self.totalMovies = response.total ?? 0
                 
-            case .failure(_):
+            case .failure:
                 let message = "Failed to get movies matching query"
                 self.moviesResponseState.value = .failure(errorMessage: message)
                 if self.currentPage != 1 { self.currentPage -= 1 }

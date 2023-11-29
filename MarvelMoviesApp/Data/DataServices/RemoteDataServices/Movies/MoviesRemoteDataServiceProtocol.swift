@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import Moya
 
 protocol MoviesRemoteDataServiceProtocol {
     func getMoviesList(page: Int,
-                       completionHandler: @escaping ((Result<BaseResponse<MoviesDataResponse>, Error>) -> Void))
+                       completionHandler: @escaping ((Result<BaseResponse<MoviesDataResponse>, Error>) -> Void)) -> Cancellable
     func searchMovies(page: Int,
                       searchKey: String,
-                      completionHandler: @escaping ((Result<BaseResponse<MoviesDataResponse>, Error>) -> Void))
+                      completionHandler: @escaping ((Result<BaseResponse<MoviesDataResponse>, Error>) -> Void)) -> Cancellable
     func getMovieDetails(movieId: Int,
                          completionHandler: @escaping ((Result<BaseResponse<MovieDetailsResponse>, Error>) -> Void))
 }

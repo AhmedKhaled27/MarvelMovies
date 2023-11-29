@@ -21,8 +21,6 @@ protocol MoviesListViewModelProtocol {
     func viewDidLoad()
         //TableView
     func getMovieCellViewModel(forCellAtIndex index: Int) -> MovieCellViewModel?
-    func getMovieDetailsViewModel(forMovieAtIndex index: Int,
-                                  completionHander: @escaping (MovieDetailsViewModel?) -> Void)
     func loadMoreMovies()
     func didSelectMovieCell(atIndex index: Int)
         //SearchBar

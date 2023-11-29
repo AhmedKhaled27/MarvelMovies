@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Moya
 
 class MovieDataRepository {
     //MARK: Properties
@@ -15,9 +16,10 @@ class MovieDataRepository {
 
 //MARK: Conform to MovieRepository
 extension MovieDataRepository: MovieRepository {
-    func getMoviesList(page: Int, completionHandler: @escaping ((Result<Movies, Error>) -> Void)) {
-        moviesRemoteDataService.getMoviesList(page: page,
-                                              completionHandler: { result in
+    func getMoviesList(page: Int,
+                       completionHandler: @escaping ((Result<Movies, Error>) -> Void)) -> Cancellable {
+        return moviesRemoteDataService.getMoviesList(page: page,
+                                                     completionHandler: { result in
             switch result {
             case let .success(response):
                 guard let data = response.data else {
@@ -31,21 +33,23 @@ extension MovieDataRepository: MovieRepository {
         })
     }
     
-    func searchMovies(page: Int, searchKey: String, completionHandler: @escaping ((Result<Movies, Error>) -> Void)) {
-        moviesRemoteDataService.searchMovies(page: page,
-                                             searchKey: searchKey,
-                                             completionHandler: { result in
-           switch result {
-           case let .success(responce):
-               guard let data = responce.data else {
-                   completionHandler(.failure("Cann't get movies data matching query"))
-                   return
-               }
-               completionHandler(.success(data.toDomain()))
-           case let .failure(error):
-               completionHandler(.failure(error))
-           }
-       })
+    func searchMovies(page: Int,
+                      searchKey: String,
+                      completionHandler: @escaping ((Result<Movies, Error>) -> Void)) -> Cancellable{
+        return moviesRemoteDataService.searchMovies(page: page,
+                                                    searchKey: searchKey,
+                                                    completionHandler: { result in
+            switch result {
+            case let .success(response):
+                guard let data = response.data else {
+                    completionHandler(.failure("Cann't get movies data matching query"))
+                    return
+                }
+                completionHandler(.success(data.toDomain()))
+            case let .failure(error):
+                completionHandler(.failure(error))
+            }
+        })
     }
     
     func getMovieDetailsBtID(movieId: Int,

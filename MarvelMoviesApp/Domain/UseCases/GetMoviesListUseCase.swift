@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import Moya
 
 protocol GetMoviesList {
     func execute(page: Int,
-                completionHandler: @escaping ((Result<Movies, Error>) -> Void) )
+                 completionHandler: @escaping ((Result<Movies, Error>) -> Void)) -> Cancellable
 }
 
 class GetMoviesListUseCase {
@@ -19,8 +20,8 @@ class GetMoviesListUseCase {
 
 //MARK: conform to GetMoviesList
 extension GetMoviesListUseCase: GetMoviesList {
-    func execute(page: Int, completionHandler: @escaping ((Result<Movies, Error>) -> Void)) {
-        movieRepository.getMoviesList(page: page,
-                                      completionHandler: completionHandler)
+    func execute(page: Int, completionHandler: @escaping ((Result<Movies, Error>) -> Void)) -> Cancellable {
+        return movieRepository.getMoviesList(page: page,
+                                             completionHandler: completionHandler)
     }
 }

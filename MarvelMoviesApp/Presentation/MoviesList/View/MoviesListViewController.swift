@@ -70,8 +70,8 @@ extension MoviesListViewController {
     private func scrollToTableViewTop() {
         if viewModel.numberOfItems > 0 {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0),
-                                       at: .top,
-                                       animated: false)
+                                  at: .top,
+                                  animated: false)
         }
     }
 }
@@ -98,7 +98,8 @@ extension MoviesListViewController {
                 
             case .nextPage:
                 self.nextPageLoadingSpinner?.removeFromSuperview()
-                self.nextPageLoadingSpinner = self.makeActivityIndicator(size: .init(width: self.tableView.frame.width, height: 44))
+                self.nextPageLoadingSpinner = self.makeActivityIndicator(size: .init(width: self.tableView.frame.width,
+                                                                                     height: 44))
                 self.tableView.tableFooterView = self.nextPageLoadingSpinner
             }
             
@@ -202,6 +203,12 @@ extension MoviesListViewController: UISearchBarDelegate {
         viewModel.setSearchingIsEnabled(false)
         scrollToTableViewTop()
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.didSearch(searchKey: searchText)
+        scrollToTableViewTop()
+    }
+    
 }
 
 extension MoviesListViewController: UISearchControllerDelegate {

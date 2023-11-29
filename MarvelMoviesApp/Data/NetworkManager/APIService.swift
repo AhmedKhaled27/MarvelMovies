@@ -7,6 +7,7 @@
 
 import Foundation
 import Moya
+import Alamofire
 
 public class APIService<T> where T: TargetType {
     // MARK: - Attributes
@@ -37,7 +38,9 @@ public class APIService<T> where T: TargetType {
         provider.session.sessionConfiguration.timeoutIntervalForResource = 20
     }
     
-    func request<C: Codable>(target: T, objType: C.Type, completionHandler:  @escaping (_ result: Result<C, Error>) -> Void) {
+    func request<C: Codable>(target: T,
+                             objType: C.Type,
+                             completionHandler:  @escaping (_ result: Result<C, Error>) -> Void) -> Cancellable {
         provider.request(target) { (result) in
             switch result {
             case let .success(response):
@@ -49,8 +52,19 @@ public class APIService<T> where T: TargetType {
                     completionHandler(.failure(error))
                 }
             case let .failure(error):
-                completionHandler(.failure(error))
+                switch error {
+                case .underlying(let underlyingError as AFError, _):
+                    switch underlyingError {
+                    case .explicitlyCancelled:
+                        return
+                    default:
+                        completionHandler(.failure(underlyingError))
+                    }
+                default:
+                    completionHandler(.failure(error))
+                }
             }
         }
     }
+    
 }

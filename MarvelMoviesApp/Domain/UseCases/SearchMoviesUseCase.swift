@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import Moya
 
 protocol SearchMovies {
     func execute(page: Int,
                  searchKey: String,
-                 completionHandler: @escaping ((Result<Movies, Error>) -> Void) )
+                 completionHandler: @escaping ((Result<Movies, Error>) -> Void)) -> Cancellable
 }
 
 class SearchMoviesUseCase {
@@ -20,9 +21,9 @@ class SearchMoviesUseCase {
 
 //MARK: conform to GetMoviesList
 extension SearchMoviesUseCase: SearchMovies {
-    func execute(page: Int, searchKey: String, completionHandler: @escaping ((Result<Movies, Error>) -> Void)) {
-        movieRepository.searchMovies(page: page,
-                                     searchKey: searchKey,
-                                     completionHandler: completionHandler)
+    func execute(page: Int, searchKey: String, completionHandler: @escaping ((Result<Movies, Error>) -> Void)) -> Cancellable {
+        return movieRepository.searchMovies(page: page,
+                                            searchKey: searchKey,
+                                            completionHandler: completionHandler)
     }
 }
