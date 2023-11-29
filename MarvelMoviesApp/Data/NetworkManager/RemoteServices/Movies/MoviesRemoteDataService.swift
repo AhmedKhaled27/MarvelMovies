@@ -25,4 +25,10 @@ class MoviesRemoteDataService: APIService<MoviesEndPoint>, MoviesRemoteDataServi
                 objType: BaseResponse<MoviesDataResponse>.self,
                 completionHandler: completionHandler)
     }
+    
+    func getMovieDetails(maovieId: Int, completionHandler: @escaping ((Result<BaseResponse<MovieDetailsResponse>, Error>) -> Void)) {
+        request(target: .movieDetails(movieId: maovieId), objType: BaseResponse<MovieDetailsResponse>.self,
+                completionHandler: completionHandler)
+    }
+    
 }

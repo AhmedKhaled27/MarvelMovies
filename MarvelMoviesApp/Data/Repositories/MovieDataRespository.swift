@@ -51,4 +51,20 @@ extension MovieDataRespository: MovieRepository {
            }
        })
     }
+    
+    func getMovieDetailsBtID(movieId: Int, completionHandler: @escaping ((Result<MovieDetails, Error>) -> Void)) {
+        moviesRemoteDataService.getMovieDetails(maovieId: movieId) { result in
+            switch result {
+            case let .success(responce):
+                guard let data = responce.data else {
+                    completionHandler(.failure("Cann't get movies data matching query"))
+                    return
+                }
+                completionHandler(.success(data.toDomain()))
+                
+            case let .failure(error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
 }

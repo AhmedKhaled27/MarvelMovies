@@ -34,13 +34,20 @@ extension SplashViewController {
     }
     
     private func navigateToMovies() {
+        //Services
         let moviesRemoteDataService = MoviesRemoteDataService()
+        //Repositories
         let movieReposotiry = MovieDataRespository(moviesRemoteDataService: moviesRemoteDataService)
+        //UseCases
         let getMoviesListUseCase = GetMoviesListUseCase(movieRepository: movieReposotiry)
         let searchMoviesUseCase = SearchMoviesUseCase(movieRepository: movieReposotiry)
+        let getMovieDetailsByIDUseCase = GetMovieDetailsByIDUseCase(movieRepository: movieReposotiry)
+        //ViewModel
         let viewModel = MoviesListViewModel(getMoviesListUseCase: getMoviesListUseCase,
-                                            searchMoviesUseCase: searchMoviesUseCase)
+                                            searchMoviesUseCase: searchMoviesUseCase,
+                                            getMovieDetailsByIdUseCase: getMovieDetailsByIDUseCase)
         let moviesViewController = MoviesListViewController(viewModel: viewModel)
+        
         let navigationController = UINavigationController(rootViewController: moviesViewController)
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.modalPresentationStyle = .fullScreen

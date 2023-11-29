@@ -21,6 +21,7 @@ class MoviesListViewModel {
     //MARK: UseCases
     private let getMoviesListUseCase: GetMoviesList
     private let searchMoviesUseCase: SearchMovies
+    private let getMovieDetailsByIdUseCase: GetMovieDetailsByID
     
     //MARK: Properites
     private var moviesList: [Movie] = [] {
@@ -49,9 +50,11 @@ class MoviesListViewModel {
     
     //MARK: Initialzer
     init(getMoviesListUseCase: GetMoviesList,
-         searchMoviesUseCase: SearchMovies) {
+         searchMoviesUseCase: SearchMovies,
+         getMovieDetailsByIdUseCase: GetMovieDetailsByID) {
         self.getMoviesListUseCase = getMoviesListUseCase
         self.searchMoviesUseCase = searchMoviesUseCase
+        self.getMovieDetailsByIdUseCase = getMovieDetailsByIdUseCase
     }
 }
 
@@ -92,6 +95,7 @@ extension MoviesListViewModel: MoviesListViewModelProtocol {
         case .expanded: newState = .collapsed
         }
         moviesCellsViewModels.value?[index].updateCellState(newState: newState)
+        getMovieDetailsById(movieId: moviesList[index].id!)
     }
         //SearchBar
     func didSearch(searchKey: String) {
@@ -169,5 +173,19 @@ extension MoviesListViewModel {
         currentPage = 1
         totalMovies = 0
         moviesList = []
+    }
+    
+    private func getMovieDetailsById(movieId: Int) {
+        getMovieDetailsByIdUseCase.execute(movieId: movieId,
+                                           completionHandler: { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case let .success(response):
+                print(response.id)
+                
+            case let .failure(error):
+                debugPrint("Failed to get movie details with error \(error.localizedDescription)")
+            }
+        })
     }
 }

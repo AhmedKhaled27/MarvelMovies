@@ -13,4 +13,6 @@ protocol MovieRepository {
     func searchMovies(page: Int,
                       searchKey: String,
                       completionHandler: @escaping ((Result<Movies, Error>) -> Void))
+    func getMovieDetailsBtID(movieId: Int,
+                             completionHandler: @escaping ((Result<MovieDetails, Error>) -> Void))
 }
